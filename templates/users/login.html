@@ -1,0 +1,55 @@
+{% extends "index.html" %} {% load static %} {% block 'head' %} <link
+rel="stylesheet" href="{% static "users/styles.css" %}"> {% endblock 'head' %}
+{% block 'main' %}
+<main>
+	<div class="container">
+		<div class="hero">
+			<a href="#" class="logo">
+				<img src=" {%static 'assets/logo-white.svg' %} " alt="" />
+			</a>
+
+			<h2>Compartilhando Experiências, Cultivando Conhecimento</h2>
+		</div>
+		<div class="boxes">
+			<div class="box-form glasses">
+				<img
+					src=" {%static 'assets/logo-white.svg' %} "
+					alt="logo"
+					class="logo"
+				/>
+				<form action="index" method="post">
+					<div class="inputBox">
+						<label for="email" class="inputLabel">Email</label>
+						<input
+							type="email"
+							name="email"
+							id="email"
+							class="input"
+							placeholder="user@email.com"
+						/>
+					</div>
+					<div class="inputBox">
+						<label for="pass" class="inputLabel">Senha</label>
+						<input
+							type="password"
+							name="pass"
+							id="pass"
+							class="input"
+							placeholder="insira a senha"
+						/>
+					</div>
+
+					<button type="submit" class="button">Entrar</button>
+				</form>
+				<a href="#">Esqueceu sua senha?</a>
+			</div>
+
+			<div class="glasses box-new-account">
+				<p>Você ainda não possui uma conta?</p>
+				<a href="#">Cadastre-se</a>
+			</div>
+		</div>
+	</div>
+</main>
+
+{% endblock 'main' %}

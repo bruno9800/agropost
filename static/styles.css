@@ -1,0 +1,93 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Roboto', sans-serif;
+  color: white;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  background: black;
+  color: white;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+footer p {
+  font-size: 1.125rem;
+}
+
+footer p span {
+  color: #11C739;
+}
+
+
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.inputLabel {
+  color: #FFF;
+
+  text-align: center;
+  font-size: 0.875rem;
+  margin-left: 0.5rem;
+}
+
+.input {
+  display: flex;
+  padding: 0.625rem 1rem;
+  align-items: flex-start;
+  border-radius: 8px;
+  background: #FFF;
+
+  font-size: 1.125rem;
+
+  border: none;
+}
+
+.input:focus {
+  outline: 2px solid #11C739;
+}
+
+.button {
+  display: flex;
+  padding: 0.75rem;
+  justify-content: center;
+  align-items: center;
+
+  align-self: stretch;
+
+  border: none;
+  border-radius: 8px;
+  background: #11C739;
+  
+  color: white;
+  font-size: 1.125rem;
+  
+  cursor: pointer;
+}
+
+.button:hover {
+  scale: 1.01;
+}
+
+.button:focus {
+  scale: 0.99;
+}
