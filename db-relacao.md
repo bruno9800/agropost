@@ -1,4 +1,4 @@
-- USERS
+- PROFILE
 
   -> user django contrib
 
@@ -7,8 +7,8 @@
   - password
 
 - following
-- friends
-- bio
+
+- bio 200 lenght
 - date_of_birth
 - updated_at
 - created_at
