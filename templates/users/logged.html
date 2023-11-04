@@ -1,0 +1,12 @@
+{% extends "index.html" %} {% load static %} {% block 'head' %} <link
+rel="stylesheet" href="{% static "users/home.css" %}"> {% endblock 'head' %}
+{%block 'main' %}
+<main>
+	<h1>{{user}} bem vindo</h1>
+	<img src="{{ user.image.url }}" alt="userPicture" class="picture" />
+	<form action="{% url 'users:logout' %}" method="post">
+		{% csrf_token %}
+		<button type="submit" class=".button">Sair</button>
+	</form>
+</main>
+{% endblock 'main' %}

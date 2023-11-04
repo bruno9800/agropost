@@ -17,7 +17,7 @@ rel="stylesheet" href="{% static "users/styles.css" %}"> {% endblock 'head' %}
 					alt="logo"
 					class="logo"
 				/>
-				<form action="{%url 'login'%}" method="post" >
+				<form action="{%url 'users:login'%}" method="post">
 					{% csrf_token %}
 					<div class="inputBox">
 						<label for="email" class="inputLabel">Email</label>
@@ -42,6 +42,10 @@ rel="stylesheet" href="{% static "users/styles.css" %}"> {% endblock 'head' %}
 
 					<button type="submit" class="button">Entrar</button>
 				</form>
+				{% if erro %}
+				<span> {{ erro }} </span>
+				{% endif %}
+
 				<a href="#">Esqueceu sua senha?</a>
 			</div>
 
