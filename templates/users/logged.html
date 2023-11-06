@@ -1,12 +1,21 @@
-{% extends "index.html" %} {% load static %} {% block 'head' %} <link
-rel="stylesheet" href="{% static "users/home.css" %}"> {% endblock 'head' %}
-{%block 'main' %}
+{% extends "index.html" %} {% load static %} {% block 'head' %}
+<link rel="stylesheet" href="{% static 'users/home.css' %}" />
+{% endblock 'head' %} {%block 'main' %}
 <main>
-	<h1>{{user}} bem vindo</h1>
-	<img src="{{ user.image.url }}" alt="userPicture" class="picture" />
-	<form action="{% url 'users:logout' %}" method="post">
-		{% csrf_token %}
-		<button type="submit" class=".button">Sair</button>
-	</form>
+  <h1>{{user}} bem vindo</h1>
+  <img src="{{ user.image.url }}" alt="userPicture" class="picture" />
+  <form action="{% url 'users:logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class=".button">Sair</button>
+  </form>
+
+  <form action="{% url 'users:logged' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="users" id="users" value="{{ users.count }}" />
+    <button type="submit" class=".button">ver mais</button>
+  </form>
+  {% for user in users %}
+  <p>{{ user }}</p>
+  {% endfor %}
 </main>
 {% endblock 'main' %}
