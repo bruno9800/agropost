@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # MY APPS
     "post",
     "users",
+    "product",
 ]
 
 MIDDLEWARE = [

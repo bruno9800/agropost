@@ -17,7 +17,9 @@
 - MARCA (FAZER)
 
   - name
-  - products -> relação com PRODUCT
+  - rate -> média do rate dos produtos da marca 
+  - site
+
 
 - PRODUCT
 
