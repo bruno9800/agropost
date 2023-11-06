@@ -24,6 +24,10 @@ def login_view(request):
 @login_required
 def logged_view(request):
     userProfile = Profile.objects.get(user=request.user)
+    users_following = userProfile.following.all()[:50]
+    print(users_following)
+
+
     return render(request, "users/logged.html", {"user": userProfile})
 
 
