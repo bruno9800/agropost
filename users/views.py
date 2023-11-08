@@ -36,7 +36,7 @@ def logged_view(request):
         
 
         print(users_following)
-    return render(request, "users/logged.html", {"user": userProfile,"users":users_following})
+    return render(request, "home/index.html", {"user": userProfile,"users":users_following})
 
 
 @login_required
