@@ -28,9 +28,7 @@ def login_view(request):
                 login(request, user)
                 return redirect("users:logged")
         except:
-            return render(
-                request, "users/login.html", {"erro": "Este usuário não existe"}
-            )
+            return render(request, "users/login.html", {"erro": "Este usuário não existe"})
 
 
 def signup_view(request):
@@ -50,11 +48,11 @@ def signup_view(request):
         age = (now - birthdate) // 365
         if userAlreadyExists.exists():
             print(userAlreadyExists)
-            return HttpResponse("usuario já existe")
+            return render(request, "users/signup.html", {"erro": "Este usuário já existe"})
         if password != password_confirm:
-            return HttpResponse("senhas diferentes")
+            return render(request, "users/signup.html", {"erro": "As senhas inseridas são diferentes!"})
         if age.days < 14:
-            return HttpResponse("Idade invalida")
+            return render(request, "users/signup.html", {"erro": "Idade inválida! Você precisa ter mais de 14 anos!"})
 
         user = User.objects.create_user(username=email, email=email, password=password,)
         user.first_name, user.last_name = firstname, lastname
