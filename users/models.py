@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AnonymousUser
 
 
 class Profile(models.Model):
@@ -10,7 +10,13 @@ class Profile(models.Model):
     updated_at = models.DateField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(
-        default="user-default.png", upload_to="profile-pic", blank=True, null=True,height_field=None, width_field=None, max_length=None
+        default="user-default.png",
+        upload_to="profile-pic",
+        blank=True,
+        null=True,
+        height_field=None,
+        width_field=None,
+        max_length=None,
     )
 
     def __str__(self):
