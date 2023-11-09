@@ -1,0 +1,88 @@
+{% extends "index.html" %} {% load static %} {% block 'head' %} <link
+rel="stylesheet" href="{% static "users/signup.css" %}" /> {% endblock 'head' %}
+{% block 'main' %}
+<main class="main">
+	<div class="container">
+		<div class="hero">
+			<a href="#" class="logo">
+				<img src=" {%static 'assets/logo-white.svg' %} " alt="" />
+			</a>
+
+			<h2>Compartilhando Experiências, Cultivando Conhecimento</h2>
+		</div>
+		<div class="boxes">
+			<div class="box-form glasses">
+				<h2>Bem Vindo!</h2>
+				<form action="{%url 'users:signup'%}" method="post">
+					{% csrf_token %}
+					<div class="inputBox">
+						<label for="firstname" class="inputLabel">Nome</label>
+						<input
+							type="text"
+							name="firstname"
+							id="firstname"
+							class="input"
+							placeholder="João"
+              required
+						/>
+					</div>
+					<div class="inputBox">
+						<label for="lastname" class="inputLabel">Sobrenome</label>
+						<input
+							type="text"
+							name="lastname"
+							id="lastname"
+							class="input"
+							placeholder="Silva"
+              required
+						/>
+					</div>
+					<div class="inputBox">
+						<label for="email" class="inputLabel">Email</label>
+						<input
+							type="email"
+							name="email"
+							id="email"
+							class="input"
+							placeholder="user@email.com"
+              required
+						/>
+					</div>
+					<div class="inputBox">
+						<label for="pass" class="inputLabel">Senha</label>
+						<input
+							type="password"
+							name="pass"
+							id="pass"
+							class="input"
+							placeholder="insira a senha"
+              required
+						/>
+					</div>
+					<div class="inputBox">
+						<label for="pass2" class="inputLabel">Repetir a senha</label>
+						<input
+							type="password"
+							name="pass2"
+							id="pass2"
+							class="input"
+							placeholder="insira a senha"
+              required
+						/>
+					</div>
+          <div class="inputBox">
+						<label for="pass2" class="inputLabel">Repetir a senha</label>
+						<input type="date" name="birth" id="birth" class='input date' required>
+					</div>
+
+					<button type="submit" class="button">Cadastrar</button>
+				</form>
+				{% if erro %}
+				<span> {{ erro }} </span>
+				{% endif %}
+				<a href="{% url "users:login" %}">tentar login</a>
+			</div>
+		</div>
+	</div>
+</main>
+{% endblock 'main' %}

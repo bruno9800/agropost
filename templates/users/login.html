@@ -51,7 +51,7 @@ rel="stylesheet" href="{% static "users/styles.css" %}"> {% endblock 'head' %}
 
 			<div class="glasses box-new-account">
 				<p>Você ainda não possui uma conta?</p>
-				<a href="#">Cadastre-se</a>
+				<a href={% url 'users:signup' %}>Cadastre-se</a>
 			</div>
 		</div>
 	</div>

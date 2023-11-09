@@ -24,6 +24,7 @@ main {
   justify-content: center;
 }
 
+
 .hero h2 {
   font-size: 2rem;
   max-width: 498px;
@@ -62,43 +63,20 @@ main {
 .box-form form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.5rem;
 }
 
 .box-form form button {
   margin-top: 1.5rem;
 }
-
 .box-form a {
   color: black;
-  font-size: 12px;
+  font-size: 0.875rem;
 }
 
-.box-new-account {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  gap: 0.5rem;
-  padding: 1.5rem 3.625rem;
-}
-
-.box-new-account p {
-  color: #000;
-  font-size: 0.75rem;
-
-  text-decoration-line: underline;
-}
-
-.box-new-account a {
-  color: #11C739;
-  font-size: 1rem;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.box-new-account a:hover {
-  scale: 1.02;
+.box-form h2 {
+  align-self: flex-start;
+  font-size: 2rem;
+  color: var(--black);
 }
