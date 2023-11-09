@@ -56,12 +56,13 @@ def signup_view(request):
         if age.days < 14:
             return HttpResponse("Idade invalida")
 
-        user = User.objects.create_user(username=email, email=email, password=password)
+        user = User.objects.create_user(username=email, email=email, password=password,)
         user.first_name, user.last_name = firstname, lastname
+        user.save()
 
         Profile.objects.create(user=user, date_of_birth=birthdate)
 
-        return render(request, "users/signup.html")
+        return redirect("users:login")
 
 
 @login_required
