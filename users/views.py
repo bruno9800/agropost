@@ -7,6 +7,10 @@ import datetime
 
 # Create your views here.
 
+def profile_view(request):
+    if request.method == "GET":
+        if request.user.is_authenticated:
+            return render(request, "profile/index.html")
 
 def login_view(request):
     if request.method == "GET":

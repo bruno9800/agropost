@@ -12,7 +12,10 @@
                 <button> </button>
             </ul>
         </nav>
-        <img alt="Perfil"/>
+        <img alt="Perfil" src="./../../media/profile-pic/DSC05394.jpg" class="profileImage"/>
+        <form action="{% url 'users:profile' %}" method="get">
+            <button>{{user}}</button>
+        </form>
         <form action="{% url 'users:logout' %}" method="post">
             {% csrf_token %}
             <button type="submit" class=".button">Sair</button>
@@ -20,8 +23,22 @@
     </div>
 	<div class="content">
         <div class="feed">
-            <div class="createPost"></div>
-            <div class="trend"></div>
+            <div class="createPost">
+                <input type="text">
+                <ul>
+                    <button></button>
+                    <button></button>
+                </ul>
+            </div>
+            <div class="trend">
+                <ul>
+                    <button></button>
+                    <button></button>
+                    <button></button>
+                    <button></button>
+                    <button></button>
+                </ul>
+            </div>
             <div class="post">
                 <div class="head">
                     <img alt="profileIcon" class="profilePicture" src="./../../media/user-default.png">

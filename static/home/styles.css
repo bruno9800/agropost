@@ -7,9 +7,10 @@ main{
     align-items: center;
     color: black;
     background-color: white;
-    max-height: 10%;
+    height: 100%;
+    padding: 1rem;
 }
-.navbar img{
+.logoNavBar{
     width: 10%;
     height: 10%;
 }
@@ -26,6 +27,11 @@ main{
 .searchInput:focus {
     outline: none;
   }
+.profileImage{
+border-radius: 100%;
+width: 2.5rem;
+height: 2.5rem;
+  }
 .content{
     display: flex;
     justify-content: center;
@@ -39,10 +45,42 @@ main{
     flex-direction: column;
     align-items: center;
     width: 50%;
+    gap: 1rem;
+}
+.createPost{
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0.25rem 1rem;
+    border-radius: 0.25rem;
+}
+.createPost input{
+    background-color: #D8DAE8;
+    width: 70%;
+    height: 80%;
+    border: none;
+    border-radius: 0.5rem;
+    outline: none;
+}
+.trend{
+    display: flex;
+    align-items: center;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+}
+.trend ul{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
 }
 .post{
     gap: 1rem;
-    margin: 5px;
     padding: 1.5rem 0px 0.5rem 1rem;
     display: flex;
     flex-direction: column;
@@ -54,6 +92,11 @@ main{
 .post ul{
     display: flex;
     gap: 0.75rem;
+}
+ul{
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 ul button{
     background-color: #D8DAE8;
