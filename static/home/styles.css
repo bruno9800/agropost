@@ -134,6 +134,10 @@ ul button:focus{
 .tittle{
     font-size: calc(8px + 0.5vw);;
 }
+.username{
+    font-size: calc(4px + 0.25vw);;
+    color: green;
+}
 .description{
     font-size: calc(6px + 0.33vw);;
     color: grey;
