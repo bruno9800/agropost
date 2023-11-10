@@ -1,0 +1,168 @@
+main{
+    background-color: #D5D5D5;
+}
+.navbar{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    color: black;
+    background-color: white;
+    height: 100%;
+    padding: 1rem;
+}
+.logoNavBar{
+    width: 10%;
+    height: 10%;
+}
+.searchInput{
+    border: none;
+    border-radius: 0.25rem;
+    background-color: #EFF0F6;
+    line-height: 32px;
+    width: 30%;
+    font-family: Roboto;
+    font-weight: 300;
+    padding: 0 0 0 5px;
+}
+.searchInput:focus {
+    outline: none;
+  }
+.profileImage{
+border-radius: 100%;
+width: 2.5rem;
+height: 2.5rem;
+  }
+.content{
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+    padding:2rem 5rem 2rem 5rem;
+}
+.feed{
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    gap: 1rem;
+}
+.createPost{
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0.25rem 1rem;
+    border-radius: 0.25rem;
+}
+.createPost input{
+    background-color: #D8DAE8;
+    width: 70%;
+    height: 80%;
+    border: none;
+    border-radius: 0.5rem;
+    outline: none;
+}
+.trend{
+    display: flex;
+    align-items: center;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+}
+.trend ul{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.post{
+    gap: 1rem;
+    padding: 1.5rem 0px 0.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    max-height: 100%;
+    background-color: white;
+    border-radius: 0.25rem;
+}
+.post ul{
+    display: flex;
+    gap: 0.75rem;
+}
+ul{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+ul button{
+    background-color: #D8DAE8;
+    color: white; 
+    border: none; 
+    border-radius: 100%; /* Torna o botão circular */
+    width: 2rem; /* Largura do botão (ajuste conforme necessário) */
+    height: 2rem; /* Altura do botão (ajuste conforme necessário) */
+    cursor: pointer;
+}
+ul button:focus{
+    outline: none;
+}
+.profilePicture{
+    height: 30px;
+    width: 30px;
+}
+.postImage{
+    width:100%;
+    height: 100%;
+
+}
+.head{
+    display: flex;
+    align-items: center;
+}
+.userInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-left: 1rem;
+    width: 90%;
+    
+}
+.tittle{
+    font-size: calc(8px + 0.5vw);;
+}
+.description{
+    font-size: calc(6px + 0.33vw);;
+    color: grey;
+}
+.side{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100%;
+    width: 25%;
+    gap: 2rem;
+    
+}
+.first, .second, .third{
+    background-color: white;
+}
+.first{
+    width: 100%;
+    height: 100%;
+border-radius: 0.5rem;
+}
+.second{
+    width: 100%;
+    height: 50%;
+    border-radius: 0.5rem;
+}
+.third{
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+}

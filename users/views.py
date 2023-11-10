@@ -7,6 +7,10 @@ import datetime
 
 # Create your views here.
 
+def profile_view(request):
+    if request.method == "GET":
+        if request.user.is_authenticated:
+            return render(request, "profile/index.html")
 
 def login_view(request):
     if request.method == "GET":
@@ -76,10 +80,7 @@ def logged_view(request):
         users_following = userProfile.following.all()[: count + int(users_current)]
 
         print(users_following)
-    return render(
-        request, "users/logged.html", {"user": userProfile, "users": users_following}
-    )
-
+    return render(request, "home/index.html", {"user": userProfile,"users":users_following})
 
 @login_required
 def logout_view(request):

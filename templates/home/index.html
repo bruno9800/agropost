@@ -1,0 +1,68 @@
+{% extends "index.html" %} {% load static %} {% block 'head' %} 
+<link rel="stylesheet" href="static/home/styles.css"> {% endblock 'head' %}
+{% block 'main' %}
+<main>
+    <div class="navbar">
+        <img class="logoNavBar" src="./../../static/assets/logo-white.svg"/>
+        <input class="searchInput" type="text" placeholder="Pesquise Algo Aqui"/>
+        <nav>
+            <ul>
+                <button> </button>
+                <button> </button>
+                <button> </button>
+            </ul>
+        </nav>
+        <img alt="Perfil" src="./../../media/profile-pic/DSC05394.jpg" class="profileImage"/>
+        <form action="{% url 'users:profile' %}" method="get">
+            <button>{{user}}</button>
+        </form>
+        <form action="{% url 'users:logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class=".button">Sair</button>
+          </form>
+    </div>
+	<div class="content">
+        <div class="feed">
+            <div class="createPost">
+                <input type="text">
+                <ul>
+                    <button></button>
+                    <button></button>
+                </ul>
+            </div>
+            <div class="trend">
+                <ul>
+                    <button></button>
+                    <button></button>
+                    <button></button>
+                    <button></button>
+                    <button></button>
+                </ul>
+            </div>
+            <div class="post">
+                <div class="head">
+                    <img alt="profileIcon" class="profilePicture" src="./../../media/user-default.png">
+                    <div class="userInfo">
+                    <h1 class="tittle"> Nome do Usuário/Titulo do post</h1>
+                    <p class="description"> Descrição geral Lorem IpsumDescrição geral Lorem IpsumDescrição geral Lorem IpsumDescrição geral Lorem IpsumDescrição geral Lorem Ipsum</p>
+                    </div>    
+                </div>    
+                
+                <img alt="postImage" class="postImage" src="./../../static/assets/background-login.png"/>
+                
+                <ul>
+                    <button> </button>
+                    <button> </button>
+                    <button> </button>
+                </ul>
+            </div>
+        </div>
+            <div class="side">
+                <div class="first"> </div>
+                <div class="second"> </div>
+                <div class="third"> </div>
+            </div>
+    </div>
+</main>
+
+{% endblock 'main' %}
