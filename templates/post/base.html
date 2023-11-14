@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+{% load static %}
+{% block 'head' %}
+  <link rel="stylesheet" href="static/home/styles.css">
+{% endblock 'head' %}
+
+
+{% block 'main' %}
+  <main class='main'>
+    <div class="navbar">
+      <img class="logoNavBar" src="./../../static/assets/logo-white.svg"/>
+      <input class="searchInput" type="text" placeholder="Pesquise Algo Aqui"/>
+      <nav>
+          <ul>
+              <button> </button>
+              <button> </button>
+              <button> </button>
+          </ul>
+      </nav>
+      <img alt="Perfil" src="{{ user.image.url }}" class="profileImage"/>
+      <form action="{% url 'users:profile' %}" method="get">
+          <button>{{user}}</button>
+      </form>
+      <form action="{% url 'users:logout' %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="button">Sair</button>
+        </form>
+    </div>
+
+    {% block 'content' %}
+    {% endblock 'content' %}
+  </main>
+{% endblock 'main' %}

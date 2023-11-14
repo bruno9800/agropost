@@ -8,10 +8,12 @@ import datetime
 
 # Create your views here.
 
+
 def profile_view(request):
     if request.method == "GET":
         if request.user.is_authenticated:
             return render(request, "profile/index.html")
+
 
 def login_view(request):
     if request.method == "GET":
@@ -29,11 +31,14 @@ def login_view(request):
                 username=username,
                 password=password,
             )
+            print(user)
             if user is not None:
                 login(request, user)
                 return redirect("users:logged")
         except:
-            return render(request, "users/login.html", {"erro": "Este usuário não existe"})
+            return render(
+                request, "users/login.html", {"erro": "Este usuário não existe"}
+            )
 
 
 def signup_view(request):
@@ -53,13 +58,27 @@ def signup_view(request):
         age = (now - birthdate) // 365
         if userAlreadyExists.exists():
             print(userAlreadyExists)
-            return render(request, "users/signup.html", {"erro": "Este usuário já existe"})
+            return render(
+                request, "users/signup.html", {"erro": "Este usuário já existe"}
+            )
         if password != password_confirm:
-            return render(request, "users/signup.html", {"erro": "As senhas inseridas são diferentes!"})
+            return render(
+                request,
+                "users/signup.html",
+                {"erro": "As senhas inseridas são diferentes!"},
+            )
         if age.days < 14:
-            return render(request, "users/signup.html", {"erro": "Idade inválida! Você precisa ter mais de 14 anos!"})
+            return render(
+                request,
+                "users/signup.html",
+                {"erro": "Idade inválida! Você precisa ter mais de 14 anos!"},
+            )
 
-        user = User.objects.create_user(username=email, email=email, password=password,)
+        user = User.objects.create_user(
+            username=email,
+            email=email,
+            password=password,
+        )
         user.first_name, user.last_name = firstname, lastname
         user.save()
 
@@ -74,27 +93,32 @@ def logged_view(request):
     userProfile = Profile.objects.get(user=request.user)
 
     if request.method == "GET":
-        #try:
-            users_following = userProfile.following.all()
-            for user in users_following:
-                for post in Post.objects.filter(author=user):
-                    posts_feed.append(post)
-                    
-            print(posts_feed)
-               
-        #except:
-           #  return render(request, "home/index.html", {"error":"Ninguém postou nada ultimamente! Experimente seguir mais pessoas!"})
-    if request.method == "POST":
-       # try:
-            users_current = request.POST.get("users")
-            print(users_current)
-            users_following = userProfile.following.all()[:int(users_current)+count_post]
-            for user in users_following:
-                 posts_feed = posts_feed.union(Post.objects.filter(author=user)[:count_post])
-       # except:
-            #return render(request, "home/index.html", {"error":"Por enquanto, isso é tudo! Exmperimente seguir mais pessoas"})
+        # try:
+        users_following = userProfile.following.all()
+        for user in users_following:
+            for post in Post.objects.filter(author=user):
+                posts_feed.append(post)
 
-    return render(request, "home/index.html", {"user": userProfile,"users":users_following,"posts_feed":posts_feed})
+        print(posts_feed)
+
+    # except:
+    #  return render(request, "home/index.html", {"error":"Ninguém postou nada ultimamente! Experimente seguir mais pessoas!"})
+    if request.method == "POST":
+        # try:
+        users_current = request.POST.get("users")
+        print(users_current)
+        users_following = userProfile.following.all()[: int(users_current) + count_post]
+        for user in users_following:
+            posts_feed = posts_feed.union(Post.objects.filter(author=user)[:count_post])
+    # except:
+    # return render(request, "home/index.html", {"error":"Por enquanto, isso é tudo! Exmperimente seguir mais pessoas"})
+
+    return render(
+        request,
+        "post/home.html",
+        {"user": userProfile, "users": users_following, "posts_feed": posts_feed},
+    )
+
 
 @login_required
 def logout_view(request):
