@@ -40,14 +40,16 @@
           </ul>
       </div>
       {%endfor%}
-      {% if error %}
-  <span> {{ error }} </span>
-{% endif %}
+    {% if error %}
+        <span> {{ error }} </span>
+    {% endif %}
       
       <form action="{% url 'post:home' %}" method="post">
           {% csrf_token %}
-          <input type="hidden" name="users" id="users" value="{{ users.count }}" />
+          <input type="hidden" name="page" id="page" value="{{ page }}" />
+          {% if page < num_pages %}
           <button type="submit" class="button">ver mais</button>
+          {% endif %}
       </form>
   </div>
       <div class="side">

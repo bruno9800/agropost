@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from users.models import Profile, User
 from post.models import Post
 import datetime
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 
 
@@ -12,30 +13,26 @@ import datetime
 def home_view(request):
     posts_feed = []
     userProfile = Profile.objects.get(user=request.user)
+    posts_per_page = 2
+    error = ""
 
-    if request.method == "GET":
-        # try:
+    try:
         users_following = userProfile.following.all()
         for user in users_following:
             for post in Post.objects.filter(author=user):
                 posts_feed.append(post)
+        paginator = Paginator(posts_feed,posts_per_page)
+    except:
+        error = "Ninguém postou nada ultimamente! Experimente seguir mais pessoas, produtos e marcas!"
 
-        print(posts_feed)
+    if request.method == "GET":
+        page = 1 
 
-    # except:
-    #  return render(request, "home/index.html", {"error":"Ninguém postou nada ultimamente! Experimente seguir mais pessoas!"})
     if request.method == "POST":
-        # try:
-        users_current = request.POST.get("users")
-        print(users_current)
-        users_following = userProfile.following.all()[: int(users_current) + count_post]
-        for user in users_following:
-            posts_feed = posts_feed.union(Post.objects.filter(author=user)[:count_post])
-    # except:
-    # return render(request, "home/index.html", {"error":"Por enquanto, isso é tudo! Exmperimente seguir mais pessoas"})
+        page = int(request.POST.get("page"))+1
 
     return render(
         request,
         "post/home.html",
-        {"user": userProfile, "users": users_following, "posts_feed": posts_feed},
+        {"user": userProfile, "users": users_following, "posts_feed": paginator.page(page),"page":page,"error":error,"num_pages":paginator.num_pages},
     )
