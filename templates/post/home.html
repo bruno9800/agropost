@@ -44,7 +44,7 @@
   <span> {{ error }} </span>
 {% endif %}
       
-      <form action="{% url 'users:logged' %}" method="post">
+      <form action="{% url 'post:home' %}" method="post">
           {% csrf_token %}
           <input type="hidden" name="users" id="users" value="{{ users.count }}" />
           <button type="submit" class="button">ver mais</button>

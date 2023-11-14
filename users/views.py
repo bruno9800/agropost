@@ -34,11 +34,9 @@ def login_view(request):
             print(user)
             if user is not None:
                 login(request, user)
-                return redirect("users:logged")
+                return redirect("post:home")
         except:
-            return render(
-                request, "users/login.html", {"erro": "Este usuário não existe"}
-            )
+            return render(request, "users/login.html", {"erro": "Este usuário não existe"})
 
 
 def signup_view(request):
@@ -85,41 +83,7 @@ def signup_view(request):
         Profile.objects.create(user=user, date_of_birth=birthdate)
 
         return redirect("users:login")
-
-
-@login_required
-def logged_view(request):
-    posts_feed = []
-    userProfile = Profile.objects.get(user=request.user)
-
-    if request.method == "GET":
-        # try:
-        users_following = userProfile.following.all()
-        for user in users_following:
-            for post in Post.objects.filter(author=user):
-                posts_feed.append(post)
-
-        print(posts_feed)
-
-    # except:
-    #  return render(request, "home/index.html", {"error":"Ninguém postou nada ultimamente! Experimente seguir mais pessoas!"})
-    if request.method == "POST":
-        # try:
-        users_current = request.POST.get("users")
-        print(users_current)
-        users_following = userProfile.following.all()[: int(users_current) + count_post]
-        for user in users_following:
-            posts_feed = posts_feed.union(Post.objects.filter(author=user)[:count_post])
-    # except:
-    # return render(request, "home/index.html", {"error":"Por enquanto, isso é tudo! Exmperimente seguir mais pessoas"})
-
-    return render(
-        request,
-        "post/home.html",
-        {"user": userProfile, "users": users_following, "posts_feed": posts_feed},
-    )
-
-
+    
 @login_required
 def logout_view(request):
     logout(request)
