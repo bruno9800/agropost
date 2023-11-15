@@ -18,23 +18,27 @@ def profile_view(request):
 def login_view(request):
     if request.method == "GET":
         if request.user.is_authenticated:
-            print(request.user)
-            return redirect("users:logged")
+            return redirect("post:home")
         return render(request, "users/login.html")
     if request.method == "POST":
+        
         email = request.POST.get("email")
         password = request.POST.get("pass")
+        
         try:
+            
             username = User.objects.get(email=email.lower())
             user = authenticate(
                 request,
                 username=username,
-                password=password,
+                password=password,   
             )
-            print(user)
             if user is not None:
                 login(request, user)
                 return redirect("post:home")
+            else:
+                return render(request, "users/login.html", {"erro": "Senha incorreta"})
+            
         except:
             return render(request, "users/login.html", {"erro": "Este usuário não existe"})
 
