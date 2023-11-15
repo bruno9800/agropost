@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+
 from .models import Profile, User, AnonymousUser
 from post.models import Post
+
 import datetime
 
 # Create your views here.
@@ -19,7 +21,7 @@ def login_view(request):
     if request.method == "GET":
         if request.user.is_authenticated:
             print(request.user)
-            return redirect("users:logged")
+            return redirect("post:home")
         return render(request, "users/login.html")
     if request.method == "POST":
         email = request.POST.get("email")
@@ -36,7 +38,9 @@ def login_view(request):
                 login(request, user)
                 return redirect("post:home")
         except:
-            return render(request, "users/login.html", {"erro": "Este usuário não existe"})
+            return render(
+                request, "users/login.html", {"erro": "Este usuário não existe"}
+            )
 
 
 def signup_view(request):
@@ -83,8 +87,12 @@ def signup_view(request):
         Profile.objects.create(user=user, date_of_birth=birthdate)
 
         return redirect("users:login")
-    
+
+
 @login_required
 def logout_view(request):
     logout(request)
     return redirect("users:login")
+
+
+# class Views
