@@ -1,0 +1,40 @@
+{% extends "post/base.html" %}
+
+{% load static %} {% block 'head' %}
+<link rel="stylesheet" href="{% static 'profile/styles.css' %}" />
+{% endblock 'head' %} 
+
+{% block 'content' %}
+<div class="profile">
+    <div class="profilePost">    
+        <div class="square1">
+            <h1>Post Teste</h1>
+            <p>Subtitulo</p>
+            <p>Subtitulo</p>
+            <p>Subtitulo</p>
+            <button></button>
+        </div>
+    </div>
+    
+    <div class="profileData">
+        <div class="topProfile">
+            <div class="backgroundProfile"></div>
+            <div class="image">
+                <img alt="Perfil" src="./../../media/profile-pic/DSC05394.jpg" class="profileIcon"/>
+            </div>
+            
+        </div>
+        <div class="contentProfile">
+            <h1>Thiago Jose De Souza Neto</h1>
+            <p>Engenheiro de Computaria Aplicada</p>
+            <div class="job">LEAF SOLUTIONS</div>
+        </div>
+        
+        <div class="generic">Conteudo 1</div>
+        <div class="generic">Conteudo 2</div>
+        <div class="generic">Conteudo 3</div>
+
+        <button>Configurar</button>
+    </div>
+</div>
+{% endblock 'content' %}
