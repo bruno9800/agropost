@@ -102,3 +102,7 @@ main {
 .box-new-account a:hover {
   scale: 1.02;
 }
+
+.erro{
+  font-size: 0.8rem;
+}
