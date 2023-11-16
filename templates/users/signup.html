@@ -71,7 +71,7 @@ rel="stylesheet" href="{% static "users/signup.css" %}" /> {% endblock 'head' %}
 						/>
 					</div>
           <div class="inputBox">
-						<label for="pass2" class="inputLabel">Repetir a senha</label>
+						<label for="pass2" class="inputLabel">Data de nascimento</label>
 						<input type="date" name="birth" id="birth" class='input date' required>
 					</div>
 
@@ -80,7 +80,7 @@ rel="stylesheet" href="{% static "users/signup.css" %}" /> {% endblock 'head' %}
 				{% if erro %}
 				<span> {{ erro }} </span>
 				{% endif %}
-				<a href="{% url "users:login" %}">tentar login</a>
+				<a href="{% url "users:login" %}">Já tem um cadastro? Faça Login</a>
 			</div>
 		</div>
 	</div>

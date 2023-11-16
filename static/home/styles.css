@@ -28,9 +28,9 @@ main{
     outline: none;
   }
 .profileImage{
-border-radius: 100%;
-width: 2.5rem;
-height: 2.5rem;
+    border-radius: 100%;
+    width: 2.5rem;
+    height: 2.5rem;
   }
 .content{
     display: flex;
@@ -88,6 +88,7 @@ height: 2.5rem;
     max-height: 100%;
     background-color: white;
     border-radius: 0.25rem;
+    align-self: stretch;
 }
 .post ul{
     display: flex;
@@ -113,6 +114,7 @@ ul button:focus{
 .profilePicture{
     height: 30px;
     width: 30px;
+    border-radius: 99999px;
 }
 .postImage{
     width:100%;
@@ -133,6 +135,10 @@ ul button:focus{
 }
 .tittle{
     font-size: calc(8px + 0.5vw);;
+}
+.username{
+    font-size: calc(4px + 0.25vw);;
+    color: green;
 }
 .description{
     font-size: calc(6px + 0.33vw);;
