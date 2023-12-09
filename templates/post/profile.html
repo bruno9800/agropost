@@ -1,40 +1,79 @@
-{% extends "post/base.html" %}
-
-{% load static %} {% block 'head' %}
+{% extends "post/base.html" %} {% load static %} {% block 'head' %}
 <link rel="stylesheet" href="{% static 'profile/styles.css' %}" />
-{% endblock 'head' %} 
-
-{% block 'content' %}
+{% endblock 'head' %} {% block 'content' %}
 <div class="profile">
-    <div class="profilePost">    
-        <div class="square1">
-            <h1>Post Teste</h1>
-            <p>Subtitulo</p>
-            <p>Subtitulo</p>
-            <p>Subtitulo</p>
-            <button></button>
-        </div>
+  <div class="profilePost">
+    <div class="square1">
+      <h1>Post Teste</h1>
+      <p>Subtitulo</p>
+      <p>Subtitulo</p>
+      <p>Subtitulo</p>
+      <button></button>
     </div>
-    
-    <div class="profileData">
-        <div class="topProfile">
-            <div class="backgroundProfile"></div>
-            <div class="image">
-                <img alt="Perfil" src="./../../media/profile-pic/DSC05394.jpg" class="profileIcon"/>
-            </div>
-            
-        </div>
-        <div class="contentProfile">
-            <h1>Thiago Jose De Souza Neto</h1>
-            <p>Engenheiro de Computaria Aplicada</p>
-            <div class="job">LEAF SOLUTIONS</div>
-        </div>
-        
-        <div class="generic">Conteudo 1</div>
-        <div class="generic">Conteudo 2</div>
-        <div class="generic">Conteudo 3</div>
+  </div>
 
-        <button>Configurar</button>
+  <div class="profileData">
+    <div class="topProfile">
+      <div class="backgroundProfile"></div>
+      <div class="image">
+        <img
+          alt="Perfil"
+          src="./../../media/profile-pic/DSC05394.jpg"
+          class="profileIcon"
+        />
+      </div>
     </div>
+    <div class="contentProfile">
+      <h1>Thiago Jose De Souza Neto</h1>
+      <p>Engenheiro de Computaria Aplicada</p>
+      <div class="job">LEAF SOLUTIONS</div>
+    </div>
+
+    <div class="generic">Conteudo 1</div>
+    <div class="generic">Conteudo 2</div>
+    <div class="generic">Conteudo 3</div>
+
+    <button id="openModal">Configurar</button>
+  </div>
 </div>
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <!-- Modal content -->
+    <span class="close" onclick="closeModal()">&times;</span>
+    <!-- Your modal content goes here -->
+    <div class="data">
+      <p>Dado 1</p>
+      <input />
+    </div>
+    <div class="data">
+        <p>Dado 1</p>
+        <input />
+      </div>
+      <div class="data">
+        <p>Dado 1</p>
+        <input />
+      </div>
+      <div class="actions">
+        <button>Excluir Conta</button>
+        <button>Salvar</button>
+      </div>
+  </div>
+</div>
+
+<!-- The Overlay -->
+<div id="overlay"></div>
+<script>
+  function openModal() {
+    document.getElementById("myModal").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+  }
+  function closeModal() {
+    document.getElementById("myModal").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    closeModal();
+  });
+  document.getElementById("openModal").addEventListener("click", openModal);
+</script>
 {% endblock 'content' %}
