@@ -102,3 +102,9 @@ main {
 .box-new-account a:hover {
   scale: 1.02;
 }
+
+
+.hero-text {
+  color: var(--black);
+  font-size: larger;
+}
