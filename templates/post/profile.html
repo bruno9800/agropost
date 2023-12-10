@@ -10,6 +10,9 @@
       <p>Subtitulo</p>
       <button></button>
     </div>
+    {% for post in posts %}
+    <div class="generic">{{ post.content }}</div>
+    {% endfor %} 
   </div>
 
   <div class="profileData">
@@ -18,24 +21,25 @@
       <div class="image">
         <img
           alt="Perfil"
-          src="./../../media/profile-pic/DSC05394.jpg"
+          src="{{ profile_user.profile.image.url }}"
           class="profileIcon"
         />
       </div>
     </div>
     <div class="contentProfile">
-      <h1>Thiago Jose De Souza Neto</h1>
-      <p>Engenheiro de Computaria Aplicada</p>
-      <div class="job">LEAF SOLUTIONS</div>
+      <h1>{{ profile_user.username }}</h1>
+      <p>{{ profile_user.profile.job_title }}</p>
+      <div class="job">{{ profile_user.profile.job_company }}</div>
     </div>
 
-    <div class="generic">Conteudo 1</div>
-    <div class="generic">Conteudo 2</div>
-    <div class="generic">Conteudo 3</div>
-
-    <button id="openModal">Configurar</button>
+    
+    
+    {% if user.is_authenticated and user.username == profile_user.username %}
+      <button id="openModal">Configurar</button>
+    {% endif %}
   </div>
 </div>
+
 <div id="myModal" class="modal">
   <div class="modal-content">
     <!-- Modal content -->
@@ -46,17 +50,17 @@
       <input />
     </div>
     <div class="data">
-        <p>Dado 1</p>
-        <input />
-      </div>
-      <div class="data">
-        <p>Dado 1</p>
-        <input />
-      </div>
-      <div class="actions">
-        <button>Excluir Conta</button>
-        <button>Salvar</button>
-      </div>
+      <p>Dado 1</p>
+      <input />
+    </div>
+    <div class="data">
+      <p>Dado 1</p>
+      <input />
+    </div>
+    <div class="actions">
+      <button>Excluir Conta</button>
+      <button>Salvar</button>
+    </div>
   </div>
 </div>
 
