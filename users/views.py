@@ -14,7 +14,7 @@ import datetime
 def profile_view(request):
     if request.method == "GET":
         if request.user.is_authenticated:
-            return render(request, "profile/index.html")
+            return render(request, "post/profile.html")
 
 
 def login_view(request):

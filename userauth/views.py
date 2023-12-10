@@ -16,3 +16,11 @@ class CustomPasswordResetView(PasswordResetView):
 
 class CustomPasswordResetDoneView(PasswordResetDoneView):
     template_name = "userauth/reset-password-done.html"
+
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = "userauth/reset-password-confirm.html"
+
+
+class CustomPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = "userauth/reset-password-complete.html"

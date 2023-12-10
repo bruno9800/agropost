@@ -1,61 +1,70 @@
 {% extends "post/base.html" %}
 
-
 {% block 'content' %}
-<div class="content">
-  <div class="feed">
+  <div class="content">
+    <div class="feed">
       <div class="createPost">
-          <input type="text">
-          <ul>
-              <button></button>
-              <button></button>
-          </ul>
+        <input type="text" placeholder="Publique Algo">
+        <ul>
+          <button><img src="./../../static/assets/enviar.svg" alt="Enviar"></button>
+          <button><img src="./../../static/assets/camera.svg" alt="Câmera"></button>
+        </ul>
       </div>
       <div class="trend">
-          <ul>
-              <button></button>
-              <button></button>
-              <button></button>
-              <button></button>
-              <button></button>
-          </ul>
+        <ul>
+          <button></button>
+          <button></button>
+          <button></button>
+          <button></button>
+          <button></button>
+        </ul>
       </div>
       {% for post_feed in posts_feed %}
-      <div class="post">
+        <div class="post">
           <div class="head">
-              <img alt="profileIcon" class="profilePicture" src="{{ post_feed.author.profile.image.url }}">
-              <div class="userInfo">
+            <img alt="profileIcon" class="profilePicture" src="{{ post_feed.author.profile.image.url }}">
+            <div class="userInfo">
               <h1 class="tittle"> {{post_feed.title}}</h1>
               <p class="username"> {{post_feed.author}} </p>
               <p class="description"> {{post_feed.content}} </p>
-              </div>    
-          </div>    
+            </div>
+          </div>
           {% if post_feed.image %}
-          <img alt="postImage" class="postImage" src="{{ post_feed.image }}"/>
+            <img alt="postImage" class="postImage" src="{{ post_feed.image }}"/>
           {% endif %}
           <ul>
-              <button> </button>
-              <button> </button>
-              <button> </button>
+            <button><img src="./../../static/assets/postPositivo.svg" ></button>
+            <button><img src="./../../static/assets/postNegativo.svg" ></button>
+            <button onclick="toggleLike(this)" id="like"><img src="./../../static/assets/like.svg" ></button>
           </ul>
-      </div>
+        </div>
       {%endfor%}
-    {% if error %}
+      {% if error %}
         <span> {{ error }} </span>
-    {% endif %}
-      
+      {% endif %}
       <form action="{% url 'post:home' %}" method="post">
-          {% csrf_token %}
-          <input type="hidden" name="page" id="page" value="{{ page }}" />
-          {% if page < num_pages %}
+        {% csrf_token %}
+        <input type="hidden" name="page" id="page" value="{{ page }}" />
+        {% if page < num_pages %}
           <button type="submit" class="button">ver mais</button>
-          {% endif %}
+        {% endif %}
       </form>
+    </div>
+    <div class="side">
+      <div class="first"> </div>
+      <div class="second"> </div>
+      <div class="third"> </div>
+    </div>
   </div>
-      <div class="side">
-          <div class="first"> </div>
-          <div class="second"> </div>
-          <div class="third"> </div>
-      </div>
-</div>
+
+  <script>
+    function toggleLike(button) {
+      var likeImage = button.querySelector('img');
+      if (likeImage.src.endsWith('like.svg')) {
+        likeImage.src = "./../../static/assets/likePreenchido.svg";
+      } else if (likeImage.src.endsWith('likePreenchido.svg')) {
+        likeImage.src = "./../../static/assets/like.svg";
+      }
+    }
+  </script>
 {% endblock 'content' %}

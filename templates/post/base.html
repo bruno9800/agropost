@@ -8,13 +8,12 @@
 {% block 'main' %}
   <main class='main'>
     <div class="navbar">
-      <img class="logoNavBar" src="./../../static/assets/logo-white.svg"/>
+      <img class="logoNavBar" id="logo" src="./../../static/assets/logo-white.svg"/>
       <input class="searchInput" type="text" placeholder="Pesquise Algo Aqui"/>
       <nav>
           <ul>
-              <button> </button>
-              <button> </button>
-              <button> </button>
+              <img src ="./../../static/assets/buscar.svg"/>
+              <button>Pesquise Aqui </button>
           </ul>
       </nav>
       <img alt="Perfil" src="{{ user.image.url }}" class="profileImage"/>
@@ -30,4 +29,9 @@
     {% block 'content' %}
     {% endblock 'content' %}
   </main>
+  <script>
+     document.getElementById('logo').addEventListener('click', function() {
+         window.location.href = "http://127.0.0.1:8000";
+     });
+  </script>
 {% endblock 'main' %}
