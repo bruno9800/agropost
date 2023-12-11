@@ -1,6 +1,8 @@
 :root {
   --green: #11C739;
   --black: #000000;
+
+  --danger:#dc3545;
 }
 
 * {

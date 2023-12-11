@@ -1,61 +1,158 @@
-{% extends "post/base.html" %}
+{% extends "post/base.html" %} {% block 'content' %}
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-{% block 'content' %}
 <div class="content">
   <div class="feed">
-      <div class="createPost">
-          <input type="text">
-          <ul>
-              <button></button>
-              <button></button>
-          </ul>
+    <div class="createPost">
+      <input type="text" placeholder="Publique Algo" />
+      <ul>
+        <button>
+          <img src="./../../static/assets/enviar.svg" alt="Enviar" />
+        </button>
+        <button>
+          <img src="./../../static/assets/camera.svg" alt="Câmera" />
+        </button>
+      </ul>
+    </div>
+    <div class="trend">
+      <ul>
+        <button class="trendButtons active">Explorar</button>
+        <button class="trendButtons">Seguindo</button>
+      </ul>
+    </div>
+    {% for post_feed in posts_feed %}
+<div class="post">
+   <div class="head">
+      <a href="{% url 'users:profile' username=post_feed.author.username %}">
+         <button>
+            <img alt="profileIcon" class="profilePicture" src="{{ post_feed.author.profile.image.url }}"/>
+         </button>
+      </a>
+      <div class="userInfo">
+         <h1 class="tittle">{{post_feed.title}}</h1>
+         <p class="username">{{post_feed.author}}</p>
+         <p class="description">{{post_feed.content}}</p>
       </div>
-      <div class="trend">
-          <ul>
-              <button></button>
-              <button></button>
-              <button></button>
-              <button></button>
-              <button></button>
-          </ul>
-      </div>
-      {% for post_feed in posts_feed %}
-      <div class="post">
-          <div class="head">
-              <img alt="profileIcon" class="profilePicture" src="{{ post_feed.author.profile.image.url }}">
-              <div class="userInfo">
-              <h1 class="tittle"> {{post_feed.title}}</h1>
-              <p class="username"> {{post_feed.author}} </p>
-              <p class="description"> {{post_feed.content}} </p>
-              </div>    
-          </div>    
-          {% if post_feed.image %}
-          <img alt="postImage" class="postImage" src="{{ post_feed.image }}"/>
-          {% endif %}
-          <ul>
-              <button> </button>
-              <button> </button>
-              <button> </button>
-          </ul>
-      </div>
-      {%endfor%}
-    {% if error %}
-        <span> {{ error }} </span>
-    {% endif %}
-      
-      <form action="{% url 'post:home' %}" method="post">
-          {% csrf_token %}
-          <input type="hidden" name="page" id="page" value="{{ page }}" />
-          {% if num_pages != 1 %}
-          <button type="submit" class="button" >ver mais</button>
-          {% endif %}
-      </form>
-  </div>
-      <div class="side">
-          <div class="first"> </div>
-          <div class="second"> </div>
-          <div class="third"> </div>
-      </div>
+   </div>
+   {% if post_feed.image %}
+      <img alt="postImage" class="postImage" src="{{ post_feed.image }}" />
+   {% endif %}
+   <ul>
+      <button onclick="toggleLike('{{ post_feed.id }}')" id="like_{{ post_feed.id }}">
+         <img src="./../../static/assets/postPositivo.svg" />
+      </button>
+      <button onclick="toggleDislike('{{ post_feed.id }}')" id="dislike_{{ post_feed.id }}">
+         <img src="./../../static/assets/postNegativo.svg" />
+      </button>
+   </ul>
 </div>
+{% endfor %} {% if error %}
+    <span> {{ error }} </span>
+    {% endif %}
+    <form action="{% url 'post:home' %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="page" id="page" value="{{ page }}" />
+      {% if num_pages !- 1 %}
+      <button type="submit" class="button">ver mais</button>
+      {% endif %}
+    </form>
+  </div>
+  <div class="side">
+    <div class="first">
+      <img src="./../../static/assets/propaganda1.jpg" />
+      <div class="publi"><p>Aproveite As Novidades</p></div>
+    </div>
+    <div class="second"></div>
+    <div class="third"></div>
+  </div>
+</div>
+
+<script>
+  function toggleLike(postId) {
+    resetDislike(postId);
+
+    var likeButton = document.getElementById("like_" + postId);
+    var likeImage = likeButton.querySelector("img");
+
+    if (likeImage.src.endsWith("postPositivo.svg")) {
+      likeImage.src = "./../../static/assets/likedArrow.svg";
+    } else if (likeImage.src.endsWith("likedArrow.svg")) {
+      likeImage.src = "./../../static/assets/postPositivo.svg";
+    }
+  }
+
+  function toggleDislike(postId) {
+    resetLike(postId);
+
+    var dislikeButton = document.getElementById("dislike_" + postId);
+    var dislikeImage = dislikeButton.querySelector("img");
+
+    if (dislikeImage.src.endsWith("postNegativo.svg")) {
+      dislikeImage.src = "./../../static/assets/unlikedArrow.svg";
+    } else if (dislikeImage.src.endsWith("unlikedArrow.svg")) {
+      dislikeImage.src = "./../../static/assets/postNegativo.svg";
+    }
+  }
+
+  function resetLike(postId) {
+    var likeButton = document.getElementById("like_" + postId);
+    var likeImage = likeButton.querySelector("img");
+    likeImage.src = "./../../static/assets/postPositivo.svg";
+  }
+
+  function resetDislike(postId) {
+    var dislikeButton = document.getElementById("dislike_" + postId);
+    var dislikeImage = dislikeButton.querySelector("img");
+    dislikeImage.src = "./../../static/assets/postNegativo.svg";
+  }
+
+  function initializeCarousel(carouselClass, imagePaths, interval) {
+    var carousel = $(carouselClass);
+    var currentIndex = 0;
+
+    function showItem(index) {
+      carousel.find("img").attr("src", imagePaths[index]);
+      //carousel.find('.publi p').text('Saiba Mais!');
+    }
+
+    function nextItem() {
+      currentIndex = (currentIndex + 1) % imagePaths.length;
+      showItem(currentIndex);
+    }
+
+    showItem(currentIndex);
+    setInterval(nextItem, interval);
+  }
+  initializeCarousel(
+    ".first",
+    [
+      "./../../static/assets/propaganda1.jpg",
+      "./../../static/assets/propaganda2.jpg",
+    ],
+    5000
+  );
+
+  function initializeTrendButtons(selector) {
+  $(`${selector}:contains("Explorar")`).addClass("active");
+  function toggleButtons(button) {
+    if (!$(button).hasClass("active")) {
+      $(selector).removeClass("active");
+      $(button).addClass("active");
+    }
+  }
+  $(selector).click(function () {
+    toggleButtons(this);
+  });
+  $(document).click(function (event) {
+    const clickedButton = $(event.target).closest(selector);
+    if (clickedButton.length) {
+      return;
+    }
+  });
+} $(document).ready(function () {
+  initializeTrendButtons(".trendButtons");});
+
+</script>
+
 {% endblock 'content' %}

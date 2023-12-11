@@ -1,33 +1,44 @@
-{% extends "index.html" %}
-{% load static %}
-{% block 'head' %}
-  <link rel="stylesheet" href="static/home/styles.css">
-{% endblock 'head' %}
-
-
-{% block 'main' %}
-  <main class='main'>
-    <div class="navbar">
-      <img class="logoNavBar" src="./../../static/assets/logo-white.svg"/>
-      <input class="searchInput" type="text" placeholder="Pesquise Algo Aqui"/>
+{% extends "index.html" %} {% load static %} {% block 'head' %}
+<link rel="stylesheet" href="static/home/styles.css" />
+{% endblock 'head' %} {% block 'main' %}
+<main class="main">
+  <div class="navbar">
+    <img
+      class="logoNavBar"
+      id="logo"
+      src="./../../static/assets/logo-white.svg"
+    />
+    <div class="searchNav">
+      <input class="searchInput" type="text" placeholder="Pesquise Algo Aqui" />
       <nav>
-          <ul>
-              <button> </button>
-              <button> </button>
-              <button> </button>
-          </ul>
+        <ul>
+          <button class="searchButton">
+            <div>
+              <a>Pesquisar</a>
+              <img
+                src="./../../static/assets/buscar.svg"
+                style="height: 20%; width: 20%"
+              />
+            </div>
+          </button>
+        </ul>
       </nav>
-      <img alt="Perfil" src="{{ user.image.url }}" class="profileImage"/>
-      <form action="{% url 'users:profile' %}" method="get">
-          <button type="submit" class="button">{{user}}</button>
-      </form>
-      <form action="{% url 'users:logout' %}" method="post">
-          {% csrf_token %}
-          <button type="submit" class="button">Sair</button>
-        </form>
     </div>
+    <img alt="Perfil" src="{{ user.image.url }}" class="profileImage" />
+    <form action="{% url 'users:profile' username=user%}" method="get">
+      <button>{{user}}</button>
+    </form>
+    <form action="{% url 'users:logout' %}" method="post">
+      {% csrf_token %}
+      <button type="submit" class="button">Sair</button>
+    </form>
+  </div>
 
-    {% block 'content' %}
-    {% endblock 'content' %}
-  </main>
+  {% block 'content' %} {% endblock 'content' %}
+</main>
+<script>
+  document.getElementById("logo").addEventListener("click", function () {
+    window.location.href = "http://127.0.0.1:8000";
+  });
+</script>
 {% endblock 'main' %}

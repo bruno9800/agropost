@@ -11,10 +11,14 @@ import datetime
 # Create your views here.
 
 
-def profile_view(request):
+def profile_view(request, username):
     if request.method == "GET":
-        if request.user.is_authenticated:
-            return render(request, "profile/index.html")
+        try:
+            user = User.objects.get(username=username)
+            return render(request, "post/profile.html", {"profile_user": user})
+        except User.DoesNotExist:
+            # Lógica para lidar com o caso em que o usuário não é encontrado
+            return render(request, "post/home.html")
 
 
 def login_view(request):

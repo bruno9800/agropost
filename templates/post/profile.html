@@ -1,0 +1,83 @@
+{% extends "post/base.html" %} {% load static %} {% block 'head' %}
+<link rel="stylesheet" href="{% static 'profile/styles.css' %}" />
+{% endblock 'head' %} {% block 'content' %}
+<div class="profile">
+  <div class="profilePost">
+    <div class="square1">
+      <h1>Post Teste</h1>
+      <p>Subtitulo</p>
+      <p>Subtitulo</p>
+      <p>Subtitulo</p>
+      <button></button>
+    </div>
+    {% for post in posts %}
+    <div class="generic">{{ post.content }}</div>
+    {% endfor %} 
+  </div>
+
+  <div class="profileData">
+    <div class="topProfile">
+      <div class="backgroundProfile"></div>
+      <div class="image">
+        <img
+          alt="Perfil"
+          src="{{ profile_user.profile.image.url }}"
+          class="profileIcon"
+        />
+      </div>
+    </div>
+    <div class="contentProfile">
+      <h1>{{ profile_user.username }}</h1>
+      <p>{{ profile_user.profile.job_title }}</p>
+      <div class="job">{{ profile_user.profile.job_company }}</div>
+    </div>
+
+    
+    
+    {% if user.is_authenticated and user.username == profile_user.username %}
+      <button id="openModal">Configurar</button>
+    {% endif %}
+  </div>
+</div>
+
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <!-- Modal content -->
+    <span class="close" onclick="closeModal()">&times;</span>
+    <!-- Your modal content goes here -->
+    <div class="data">
+      <p>Dado 1</p>
+      <input />
+    </div>
+    <div class="data">
+      <p>Dado 1</p>
+      <input />
+    </div>
+    <div class="data">
+      <p>Dado 1</p>
+      <input />
+    </div>
+    <div class="actions">
+      <button>Excluir Conta</button>
+      <button>Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- The Overlay -->
+<div id="overlay"></div>
+<script>
+  function openModal() {
+    document.getElementById("myModal").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+  }
+  function closeModal() {
+    document.getElementById("myModal").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    closeModal();
+  });
+  document.getElementById("openModal").addEventListener("click", openModal);
+</script>
+{% endblock 'content' %}
