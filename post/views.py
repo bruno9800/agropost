@@ -13,7 +13,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def home_view(request):
     posts_feed = []
     userProfile = Profile.objects.get(user=request.user)
-    posts_per_page = 2
+    posts_per_page = 1
     error = ""
     page = 2
 
