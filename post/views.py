@@ -15,7 +15,9 @@ def home_view(request):
     userProfile = Profile.objects.get(user=request.user)
     posts_per_page = 2
     error = ""
+    page = 2
 
+    
     try:
         users_following = userProfile.following.all()
         for user in users_following:
@@ -25,14 +27,14 @@ def home_view(request):
     except:
         error = "Ninguém postou nada ultimamente! Experimente seguir mais pessoas, produtos e marcas!"
 
-    if request.method == "GET":
-        page = 1 
-
     if request.method == "POST":
-        page = int(request.POST.get("page"))+1
+        paginator = Paginator(posts_feed,posts_per_page+int(request.POST.get('page')))
+        page = int(request.POST.get('page')) + posts_per_page
+        
+        
 
     return render(
         request,
         "post/home.html",
-        {"user": userProfile, "users": users_following, "posts_feed": paginator.page(page),"page":page,"error":error,"num_pages":paginator.num_pages},
+        {"user": userProfile, "users": users_following, "posts_feed": paginator.page(1),"page":page,"error":error,"num_pages":paginator.num_pages},
     )
