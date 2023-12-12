@@ -1,10 +1,8 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout
 from users.models import Profile, User
 from post.models import Post
-import datetime
+from product.models import Product
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
@@ -18,8 +16,8 @@ def home_view(request):
     error = ""
     page = 2
     try:
-        all_posts = Post.objects.all()
-        users_following = userProfile.following.all()
+        products = Product.objects.all()
+        users_following = userProfile.following.all()[:5]
         for user in users_following:
             for post in Post.objects.filter(author=user):
                 posts_feed.append(post)
@@ -43,7 +41,7 @@ def home_view(request):
             "page": page,
             "error": error,
             "num_pages": paginator.num_pages,
-            "all_posts": all_posts,
+            "products": products,
         },
     )
 

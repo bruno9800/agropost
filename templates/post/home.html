@@ -30,7 +30,23 @@
       <img src="./../../static/assets/propaganda1.jpg" />
       <div class="publi"><p>Aproveite As Novidades</p></div>
     </div>
-    <div class="second"></div>
+    <div class="second">
+      {% for product in products %}
+        <div class='productBox'>
+          <div class="productImg">
+            <img src="{{product.picture.url}}" alt="imagem do produto">
+          </div>
+          <div class="productHero">
+            <strong>{{product.name}}</strong>
+            <span>{{ product.product_type }}</span>
+          </div>
+        </div>
+      {% endfor %}
+
+      <a href="#" class='more-products'>
+        ver mais
+      </a>
+    </div>
     <div class="third"></div>
   </div>
 </div>
