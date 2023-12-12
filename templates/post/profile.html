@@ -12,7 +12,7 @@
     </div>
     {% for post in posts %}
     <div class="generic">{{ post.content }}</div>
-    {% endfor %} 
+    {% endfor %}
   </div>
 
   <div class="profileData">
@@ -26,40 +26,44 @@
         />
       </div>
     </div>
+
     <div class="contentProfile">
       <h1>{{ profile_user.username }}</h1>
-      <p>{{ profile_user.profile.job_title }}</p>
-      <div class="job">{{ profile_user.profile.job_company }}</div>
+
+      {% if profile_user.bio %}
+      <p>{{ profile_user.bio }}</p>
+      {% else %}
+      <p>Biografia não disponível</p>
+      {% endif %}
+
+      <div class="job">
+        {% if profile_user.date_of_birth %} {{ profile_user.date_of_birth }} {%
+        else %} Data de nascimento não disponível {% endif %}
+      </div>
     </div>
 
-    
-    
     {% if user.is_authenticated and user.username == profile_user.username %}
-      <button id="openModal">Configurar</button>
+    <button id="openModal">Configurar</button>
     {% endif %}
   </div>
 </div>
 
 <div id="myModal" class="modal">
   <div class="modal-content">
-    <!-- Modal content -->
     <span class="close" onclick="closeModal()">&times;</span>
-    <!-- Your modal content goes here -->
     <div class="data">
-      <p>Dado 1</p>
-      <input />
+      <p>Bio</p>
+      <input id="bioInput" placeholder="{{ profile_user.bio }}" />
     </div>
     <div class="data">
-      <p>Dado 1</p>
-      <input />
-    </div>
-    <div class="data">
-      <p>Dado 1</p>
-      <input />
+      <p>Data de Aniversário</p>
+      <input
+        id="dateOfBirthInput"
+        placeholder="{{ profile_user.date_of_birth }}"
+      />
     </div>
     <div class="actions">
-      <button>Excluir Conta</button>
-      <button>Salvar</button>
+      <button onclick="saveProfile()">Salvar</button>
     </div>
   </div>
 </div>
@@ -79,5 +83,7 @@
     closeModal();
   });
   document.getElementById("openModal").addEventListener("click", openModal);
+
 </script>
+
 {% endblock 'content' %}

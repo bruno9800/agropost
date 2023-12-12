@@ -24,9 +24,9 @@
         </ul>
       </nav>
     </div>
-    <img alt="Perfil" src="{{ user.image.url }}" class="profileImage" />
+    
     <form action="{% url 'users:profile' username=user%}" method="get">
-      <button>{{user}}</button>
+      <button class="profileButton"><img alt="Perfil" id="profileImage" class="profileImage" /></button>
     </form>
     <form action="{% url 'users:logout' %}" method="post">
       {% csrf_token %}
@@ -39,6 +39,17 @@
 <script>
   document.getElementById("logo").addEventListener("click", function () {
     window.location.href = "http://127.0.0.1:8000";
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var profileImage = document.getElementById("profileImage");
+    if (profileImage) {
+      if (window.location.pathname.indexOf("profile") !== -1) {
+        profileImage.src = "{{ profile_user.profile.image.url }}";
+      } else {
+        profileImage.src = "{{ user.image.url }}";
+      }
+    }
   });
 </script>
 {% endblock 'main' %}

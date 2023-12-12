@@ -1,7 +1,10 @@
+import json
+
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import Profile, User, AnonymousUser
 from post.models import Post
@@ -17,9 +20,8 @@ def profile_view(request, username):
             user = User.objects.get(username=username)
             return render(request, "post/profile.html", {"profile_user": user})
         except User.DoesNotExist:
-            # Lógica para lidar com o caso em que o usuário não é encontrado
             return render(request, "post/home.html")
-
+        
 
 def login_view(request):
     if request.method == "GET":
