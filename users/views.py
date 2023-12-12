@@ -15,13 +15,20 @@ import datetime
 
 
 def profile_view(request, username):
-    if request.method == "GET":
-        try:
-            user = User.objects.get(username=username)
-            posts = Post.objects.filter(author=user)
-            return render(request, "post/profile.html", {"profile_user": user,"posts":posts})
-        except User.DoesNotExist:
-            return render(request, "post/home.html")
+
+    try:
+        user = User.objects.get(username=username)
+        posts = Post.objects.filter(author=user)
+        followers = Profile.objects.filter(following=user.id)
+        following = user.profile.following.all()
+    except User.DoesNotExist:
+        return render(request, "post/home.html")
+    if request.method == "POST":
+        print(request.POST['profile_id'])
+        profile_to_follow = Profile.objects.get(id=request.POST['profile_id'])
+        request.user.profile.following.add(profile_to_follow.user)
+    return render(request, "post/profile.html", {"profile_user": user,"posts":posts, "followers":followers, "following": following})
+
         
 
 def login_view(request):
@@ -63,7 +70,6 @@ def signup_view(request):
         password_confirm = request.POST.get("pass2")
         birth = request.POST.get("birth")
         userAlreadyExists = User.objects.filter(email=email)
-        print(birth)
         now = datetime.datetime.now()
         birthdate = datetime.datetime.strptime(birth, "%Y-%m-%d")
         age = (now - birthdate) // 365
