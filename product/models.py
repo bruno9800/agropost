@@ -25,6 +25,7 @@ class Product(models.Model):
         ("Veneno", "Veneno"),
         ("Fertilizante", "Fertilizante"),
         ("Agrotoxico", "Agrotoxico"),
+        ("Fungicida","Fungicida"),
     )
     name = models.CharField(blank=False, null=False, max_length=50, editable=True)
     brand = models.ForeignKey(Brand, blank=False,null=False,on_delete=models.CASCADE)
