@@ -53,7 +53,7 @@
     <form action="{% url 'post:home' %}" method="post">
       {% csrf_token %}
       <input type="hidden" name="page" id="page" value="{{ page }}" />
-      {% if page < num_pages %}
+      {% if num_pages != 1 %}
       <button type="submit" class="button">ver mais</button>
       {% endif %}
     </form>

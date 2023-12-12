@@ -18,7 +18,8 @@ def profile_view(request, username):
     if request.method == "GET":
         try:
             user = User.objects.get(username=username)
-            return render(request, "post/profile.html", {"profile_user": user})
+            posts = Post.objects.filter(author=user)
+            return render(request, "post/profile.html", {"profile_user": user,"posts":posts})
         except User.DoesNotExist:
             return render(request, "post/home.html")
         

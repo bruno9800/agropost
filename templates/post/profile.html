@@ -3,17 +3,24 @@
 {% endblock 'head' %} {% block 'content' %}
 <div class="profile">
   <div class="profilePost">
+    {% for post in posts %}
     <div class="square1">
-      <h1>Post Teste</h1>
+      <h1>{{post.title}}</h1>
       <p>Subtitulo</p>
       <p>Subtitulo</p>
       <p>Subtitulo</p>
       <button></button>
     </div>
+<<<<<<< HEAD
     {% for post in posts %}
     <div class="generic">{{ post.content }}</div>
     {% endfor %}
+=======
+    {% endfor %}
+     
+>>>>>>> 77b9973b7a595677c8ba6aeec22b7512c8ee1e6c
   </div>
+  
 
   <div class="profileData">
     <div class="topProfile">
