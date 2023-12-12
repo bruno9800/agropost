@@ -15,10 +15,9 @@ def home_view(request):
     userProfile = Profile.objects.get(user=request.user)
     posts_per_page = 1
     error = ""
-    page = 2
-
-    
+    page = 2    
     try:
+        all_posts = Post.objects.all()
         users_following = userProfile.following.all()
         for user in users_following:
             for post in Post.objects.filter(author=user):
@@ -36,5 +35,5 @@ def home_view(request):
     return render(
         request,
         "post/home.html",
-        {"user": userProfile, "users": users_following, "posts_feed": paginator.page(1),"page":page,"error":error,"num_pages":paginator.num_pages},
+        {"user": userProfile, "users": users_following, "posts_feed": paginator.page(1),"page":page,"error":error,"num_pages":paginator.num_pages, "all_posts":all_posts},
     )

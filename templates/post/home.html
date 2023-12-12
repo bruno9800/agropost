@@ -17,37 +17,92 @@
     </div>
     <div class="trend">
       <ul>
-        <button class="trendButtons active">Explorar</button>
-        <button class="trendButtons">Seguindo</button>
+        <button class="trendButtons active" onclick="setActiveButton(this)">Explorar</button>
+        <button class="trendButtons" onclick="setActiveButton(this)">Seguindo</button>
       </ul>
     </div>
+
+
+    {% if active_button == "explorar" %}
+      {% for post in all_posts %}
+        <div class="post">
+        <div class="head">
+          <a href="{% url 'users:profile' username=post.author.username %}">
+            <button>
+              <img
+                alt="profileIcon"
+                class="profilePicture"
+                src="{{ post.author.profile.image.url }}"
+              />
+            </button>
+          </a>
+          <div class="userInfo">
+            <h1 class="tittle">{{post.title}}</h1>
+            <p class="username">{{post.author}}</p>
+            <p class="description">{{post.content}}</p>
+          </div>
+        </div>
+        {% if post.image %}
+        <img alt="postImage" class="postImage" src="{{ post.image }}" />
+        {% endif %}
+        <ul>
+          <button
+            onclick="toggleLike('{{ post.id }}')"
+            id="like_{{ post.id }}"
+          >
+            <img src="./../../static/assets/postPositivo.svg" />
+          </button>
+          <button
+            onclick="toggleDislike('{{ post.id }}')"
+            id="dislike_{{ post.id }}"
+          >
+            <img src="./../../static/assets/postNegativo.svg" />
+          </button>
+        </ul>
+        </div>
+      {% endfor %} 
+    
+    {% elif active_button == "seguindo" %} 
     {% for post_feed in posts_feed %}
-<div class="post">
-   <div class="head">
-      <a href="{% url 'users:profile' username=post_feed.author.username %}">
-         <button>
-            <img alt="profileIcon" class="profilePicture" src="{{ post_feed.author.profile.image.url }}"/>
-         </button>
-      </a>
-      <div class="userInfo">
-         <h1 class="tittle">{{post_feed.title}}</h1>
-         <p class="username">{{post_feed.author}}</p>
-         <p class="description">{{post_feed.content}}</p>
+        <div class="post">
+      <div class="head">
+        <a href="{% url 'users:profile' username=post_feed.author.username %}">
+          <button>
+            <img
+              alt="profileIcon"
+              class="profilePicture"
+              src="{{ post_feed.author.profile.image.url }}"
+            />
+          </button>
+        </a>
+        <div class="userInfo">
+          <h1 class="tittle">{{post_feed.title}}</h1>
+          <p class="username">{{post_feed.author}}</p>
+          <p class="description">{{post_feed.content}}</p>
+        </div>
       </div>
-   </div>
-   {% if post_feed.image %}
+      {% if post_feed.image %}
       <img alt="postImage" class="postImage" src="{{ post_feed.image }}" />
-   {% endif %}
-   <ul>
-      <button onclick="toggleLike('{{ post_feed.id }}')" id="like_{{ post_feed.id }}">
-         <img src="./../../static/assets/postPositivo.svg" />
-      </button>
-      <button onclick="toggleDislike('{{ post_feed.id }}')" id="dislike_{{ post_feed.id }}">
-         <img src="./../../static/assets/postNegativo.svg" />
-      </button>
-   </ul>
-</div>
-{% endfor %} {% if error %}
+      {% endif %}
+      <ul>
+        <button
+          onclick="toggleLike('{{ post_feed.id }}')"
+          id="like_{{ post_feed.id }}"
+        >
+          <img src="./../../static/assets/postPositivo.svg" />
+        </button>
+        <button
+          onclick="toggleDislike('{{ post_feed.id }}')"
+          id="dislike_{{ post_feed.id }}"
+        >
+          <img src="./../../static/assets/postNegativo.svg" />
+        </button>
+      </ul>
+        </div>
+      {% endfor %}
+    {% endif %}
+    
+    {% if error %}
     <span> {{ error }} </span>
     {% endif %}
     <form action="{% url 'post:home' %}" method="post">
@@ -69,6 +124,7 @@
 </div>
 
 <script>
+  const activeButton = document.querySelectorAll('.trendButtons')
   function toggleLike(postId) {
     resetDislike(postId);
 
@@ -133,26 +189,36 @@
     5000
   );
 
-  function initializeTrendButtons(selector) {
-  $(`${selector}:contains("Explorar")`).addClass("active");
-  function toggleButtons(button) {
-    if (!$(button).hasClass("active")) {
-      $(selector).removeClass("active");
-      $(button).addClass("active");
+  function initializeTrendButtons(selector, activeButton) {
+    $(`${selector}:contains("${activeButton}")`).addClass("active");
+    function toggleButtons(button) {
+      if (!$(button).hasClass("active")) {
+        $(selector).removeClass("active");
+        $(button).addClass("active");
+        activeButton = $(button).text().trim();
+      }
     }
+    $(selector).click(function () {
+      toggleButtons(this);
+    });
+    $(document).click(function (event) {
+      const clickedButton = $(event.target).closest(selector);
+      if (clickedButton.length) {
+        return;
+      }
+    });
   }
-  $(selector).click(function () {
-    toggleButtons(this);
+  $(document).ready(function () {
+    initializeTrendButtons(".trendButtons", "Explorar");
   });
-  $(document).click(function (event) {
-    const clickedButton = $(event.target).closest(selector);
-    if (clickedButton.length) {
-      return;
-    }
-  });
-} $(document).ready(function () {
-  initializeTrendButtons(".trendButtons");});
 
+  function setActiveButton(button) {
+    var buttons = document.querySelectorAll('.trendButtons');
+    buttons.forEach(function (btn) {
+      btn.classList.remove('active');
+    });
+    button.classList.add('active');
+  }
 </script>
 
 {% endblock 'content' %}
