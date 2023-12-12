@@ -50,17 +50,13 @@ def home_view(request):
 
 @login_required
 def explorer_view(request):
-    posts_feed = []
     userProfile = Profile.objects.get(user=request.user)
     posts_per_page = 1
     error = ""
     page = 2
     try:
-        all_posts = Post.objects.all()
+        posts_feed = Post.objects.all()
         users_following = userProfile.following.all()
-        for user in users_following:
-            for post in Post.objects.filter(author=user):
-                posts_feed.append(post)
         paginator = Paginator(posts_feed, posts_per_page)
     except:
         error = "Ninguém postou nada ultimamente! Experimente seguir mais pessoas, produtos e marcas!"
@@ -81,6 +77,5 @@ def explorer_view(request):
             "page": page,
             "error": error,
             "num_pages": paginator.num_pages,
-            "all_posts": all_posts,
         },
     )

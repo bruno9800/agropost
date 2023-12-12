@@ -120,9 +120,9 @@
       }
     });
   }
-  $(document).ready(function () {
-    initializeTrendButtons(".trendButtons", "Explorar");
-  });
+  {% comment %} $(document).ready(function () {
+    initializeTrendButtons(".trendButtons", "Seguindo");
+  }); {% endcomment %}
 
   function setActiveButton(button) {
     var buttons = document.querySelectorAll('.trendButtons');

@@ -5,8 +5,13 @@
 {% block 'trend_buttons' %}
     <div class="trend">
       <ul>
-        <button class="trendButtons active" onclick="setActiveButton(this)">Explorar</button>
-        <button class="trendButtons" onclick="setActiveButton(this)">Seguindo</button>
+        <a href={% url "post:explorer" %} >
+          <button class="trendButtons active" disabled>Explorar</button>
+        </a>
+        
+        <a href={% url "post:home" %}>
+          <button class="trendButtons" >Seguindo</button>
+        </a>
       </ul>
     </div>
 {% endblock 'trend_buttons' %}
