@@ -74,14 +74,16 @@ main{
     justify-content: center;
     gap: 2rem;
     width: 100%;
+    max-width: 1260px;
+    margin: auto;
     padding:2rem 5rem 2rem 5rem;
 }
 .feed{
     color: black;
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
-    width: 50%;
     gap: 1rem;
 }
 .createPost{
@@ -237,17 +239,18 @@ ul button:focus{
     align-items: center;
     justify-content: space-between;
     min-height: 100%;
-    width: 25%;
+    width: 360px;
     gap: 2rem;
     
 }
 .first, .second, .third{
     background-color: white;
 }
-.first{
+.first {
     position: relative;
-    max-width: 100%;
-    height: 100%;
+    display: flex;
+    align-self: stretch; 
+    height: 400px; 
     border-radius: 0.5rem;
     overflow: hidden;
 }
