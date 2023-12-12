@@ -5,6 +5,14 @@ class Brand(models.Model):
     name = models.CharField(blank=False, null=False, max_length=50, editable=True)
     rate = models.FloatField(blank=True, null=True, editable=False, default=0.0)
     site = models.CharField(blank=True, null=True, editable=True, max_length=200)
+    picture = models.ImageField(
+        upload_to="brand-pic",
+        height_field=None,
+        width_field=None,
+        max_length=None,
+        null=False,
+        blank=True,
+    )
 
     def __str__(self):
         return self.name

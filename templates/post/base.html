@@ -45,7 +45,7 @@
     var profileImage = document.getElementById("profileImage");
     if (profileImage) {
       if (window.location.pathname.indexOf("profile") !== -1) {
-        profileImage.src = "{{ profile_user.profile.image.url }}";
+        profileImage.src = "{{ user.profile.image.url }}";
       } else {
         profileImage.src = "{{ user.image.url }}";
       }
