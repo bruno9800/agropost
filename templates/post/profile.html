@@ -36,9 +36,12 @@
       <p>Biografia não disponível</p>
       {% endif %}
 
-      <div class="job">
-        {% if profile_user.date_of_birth %} {{ profile_user.date_of_birth }} {%
-        else %} Data de nascimento não disponível {% endif %}
+      <div>
+        {% if profile_user.date_of_birth %}
+        <p>{{ profile_user.date_of_birth }}</p>
+        {% else %} 
+        <p>Data de nascimento não disponível</p>
+        {% endif %}
       </div>
     </div>
 

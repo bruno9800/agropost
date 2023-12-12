@@ -8,10 +8,10 @@
       <input type="text" placeholder="Publique Algo" />
       <ul>
         <button>
-          <img src="./../../static/assets/enviar.svg" alt="Enviar" />
+          <img src="{% static 'assets/enviar.svg' %}" alt="Enviar" />
         </button>
         <button>
-          <img src="./../../static/assets/camera.svg" alt="Câmera" />
+          <img src="{% static 'assets/camera.svg' %}" alt="Câmera" />
         </button>
       </ul>
     </div>
@@ -27,7 +27,7 @@
   </div>
   <div class="side">
     <div class="first">
-      <img src="./../../static/assets/propaganda1.jpg" />
+      <img src="{% static 'assets/propaganda1.jpg' %}" />
       <div class="publi"><p>Aproveite As Novidades</p></div>
     </div>
     <div class="second">
@@ -60,9 +60,9 @@
     var likeImage = likeButton.querySelector("img");
 
     if (likeImage.src.endsWith("postPositivo.svg")) {
-      likeImage.src = "./../../static/assets/likedArrow.svg";
+      likeImage.src = "{% static 'assets/likedArrow.svg' %}";
     } else if (likeImage.src.endsWith("likedArrow.svg")) {
-      likeImage.src = "./../../static/assets/postPositivo.svg";
+      likeImage.src = "{% static 'assets/postPositivo.svg' %}";
     }
   }
 
@@ -73,22 +73,22 @@
     var dislikeImage = dislikeButton.querySelector("img");
 
     if (dislikeImage.src.endsWith("postNegativo.svg")) {
-      dislikeImage.src = "./../../static/assets/unlikedArrow.svg";
+      dislikeImage.src = "{% static 'assets/unlikedArrow.svg' %}";
     } else if (dislikeImage.src.endsWith("unlikedArrow.svg")) {
-      dislikeImage.src = "./../../static/assets/postNegativo.svg";
+      dislikeImage.src = "{% static 'assets/postNegativo.svg' %}";
     }
   }
 
   function resetLike(postId) {
     var likeButton = document.getElementById("like_" + postId);
     var likeImage = likeButton.querySelector("img");
-    likeImage.src = "./../../static/assets/postPositivo.svg";
+    likeImage.src = "{% static 'assets/postPositivo.svg' %}";
   }
 
   function resetDislike(postId) {
     var dislikeButton = document.getElementById("dislike_" + postId);
     var dislikeImage = dislikeButton.querySelector("img");
-    dislikeImage.src = "./../../static/assets/postNegativo.svg";
+    dislikeImage.src = "{% static 'assets/postNegativo.svg' %}";
   }
 
   function initializeCarousel(carouselClass, imagePaths, interval) {
@@ -111,8 +111,8 @@
   initializeCarousel(
     ".first",
     [
-      "./../../static/assets/propaganda1.jpg",
-      "./../../static/assets/propaganda2.jpg",
+      "{% static 'assets/propaganda1.jpg' %}",
+      "{% static 'assets/propaganda2.jpg' %}",
     ],
     5000
   );

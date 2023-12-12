@@ -19,9 +19,7 @@ class Product(models.Model):
         ("Agrotoxico", "Agrotoxico"),
     )
     name = models.CharField(blank=False, null=False, max_length=50, editable=True)
-    brand = models.OneToOneField(
-        Brand, related_name="belongs", on_delete=models.CASCADE
-    )
+    brand = models.ForeignKey(Brand, blank=False,null=False,on_delete=models.CASCADE)
     picture = models.ImageField(
         upload_to="product-pic",
         height_field=None,
