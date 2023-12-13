@@ -276,3 +276,29 @@ input:focus {
     background: rgba(0, 0, 0, 0.5); 
     z-index: 1; 
 }
+
+
+.follow_info {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
+.follow_info div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.follow_info .value {
+    background-color: rgb(33, 131, 49);
+    width: max-content;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    color: var(--white);
+}
+
+.follow_info .text {
+    font-size: 0.875rem;
+    font-weight: bold;
+}

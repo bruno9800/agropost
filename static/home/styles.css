@@ -72,6 +72,7 @@ main{
 .content{
     display: flex;
     justify-content: center;
+    align-items: flex-start;
     gap: 2rem;
     width: 100%;
     max-width: 1260px;
@@ -96,13 +97,17 @@ main{
     padding: 0.25rem 1rem;
     border-radius: 0.25rem;
 }
-.createPost input{
-    background-color: #D8DAE8;
-    width: 70%;
-    height: 80%;
+.createPost textarea{
+    background-color: #f5f7f6;
+    width: 100%;
     border: none;
-    border-radius: 0.5rem;
-    outline: none;
+    outline: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    padding: 0.5rem;
+
+    font-size: 1rem;
+    color: var(--black);
 }
 .createPost ul{
     display: flex;

@@ -26,7 +26,11 @@ def profile_view(request, username):
     if request.method == "POST":
         print(request.POST['profile_id'])
         profile_to_follow = Profile.objects.get(id=request.POST['profile_id'])
-        request.user.profile.following.add(profile_to_follow.user)
+        if profile_to_follow.user in request.user.profile.following.all():
+            request.user.profile.following.remove(profile_to_follow.user)
+        else:
+            request.user.profile.following.add(profile_to_follow.user)
+    print(followers)
     return render(request, "post/profile.html", {"profile_user": user,"posts":posts, "followers":followers, "following": following})
 
         

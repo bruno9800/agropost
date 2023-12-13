@@ -30,8 +30,14 @@
     <div class="contentProfile">
       <h1>{{ profile_user.username }}</h1>
       <div class="follow_info" style="display: flex;">
-      <h5 class="followers">{{ followers|length }} Seguidores  </h5>
-      <h5 class="following">{{ following|length }} Seguindo</h5>
+        <div>
+          <span class='value' >{{ followers|length }} </span>
+          <span class='text'>Seguidores</span>
+        </div>
+        <div>
+          <span class='value'>{{ following|length }} </span>
+          <span class='text'>Seguindo</span>
+        </div>
       </div>
       {% if profile_user.bio %}
       <p>{{ profile_user.bio }}</p>
@@ -51,12 +57,21 @@
     {% if user.is_authenticated and user.username == profile_user.username %}
     <button id="openModal">Configurar</button>
     {% else %}
+
+    {% if user.profile not in followers %}
     <form action="{% url 'users:profile' username=profile_user.username %}" method="post">
       {% csrf_token %}
       <input type="hidden" name="profile_id" id="profile_id" value="{{ profile_user.id }}" />
       <button type='submit' class='button'>Seguir</button>
-
     </form>
+
+    {% else %}
+    <form action="{% url 'users:profile' username=profile_user.username %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="profile_id" id="profile_id" value="{{ profile_user.id }}" />
+      <button type='submit' class='unfollow_btn' ">Deixar seguir</button>
+    </form>
+    {% endif %} 
     
     {% endif %}
   </div>

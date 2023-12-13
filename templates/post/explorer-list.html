@@ -40,17 +40,19 @@
 <img alt="postImage" class="postImage" src="{{ post_feed.image }}" />
 {% endif %}
 <ul>
-<button
-  onclick="toggleLike('{{ post_feed.id }}')"
-  id="like_{{ post_feed.id }}"
->
-  <img src="./../../static/assets/postPositivo.svg" />
-</button>
+
+  <button
+    onclick="toggleLike('{{ post_feed.id }}')"
+    id="like_{{ post_feed.id }}">
+    <img src="{% static 'assets/postPositivo.svg' %}" />
+  </button>
+
+
 <button
   onclick="toggleDislike('{{ post_feed.id }}')"
   id="dislike_{{ post_feed.id }}"
 >
-  <img src="./../../static/assets/postNegativo.svg" />
+  <img src="{% static 'assets/postNegativo.svg' %}" />
 </button>
 </ul>
 </div>
