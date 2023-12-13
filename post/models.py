@@ -13,6 +13,7 @@ class Post(models.Model):
     upgrade = models.ManyToManyField(User,related_name="upgrade",null=True,blank=True)
     downgrade = models.ManyToManyField(User,related_name="downgrade",null=True,blank=True)
 
+
     def __str__(self):
         return self.title
 

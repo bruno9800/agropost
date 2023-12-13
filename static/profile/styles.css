@@ -141,11 +141,26 @@ main{
 }
 
 
-.profileData button{
-    width: 80%;
-    height: 2rem;
+.profileData button, .buttonFollow {
+    width: auto;
+    height: auto;
+    padding: 0.5rem;
     border-radius: 99999px;
     background-color: #0279D3;
+    color: white;
+    font-weight: bold;
+    font-size: 1.25rem;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 2rem;
+}
+
+.unfollow_btn{
+    width: 100%;
+    padding: 0.5rem;
+    height: auto;
+    border-radius: 99999px;
+    background-color: rgb(255, 102, 0) !important; 
     color: white;
     font-weight: bold;
     font-size: 1.25rem;
@@ -162,35 +177,86 @@ main{
     width: 60%;
     height: 100%;
 }
-.square1{
+/* post content */
+.post{
+    gap: 1rem;
+    padding: 1.5rem 0px 0.5rem 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    gap: 1rem;
-    padding: 2rem;
-    color: black;
-    width: 100%;
-    height: 20rem;
+    justify-content: space-evenly;
+    max-height: 100%;
     background-color: white;
-    border-radius: 2rem;
+    border-radius: 0.25rem;
+    align-self: stretch;
 }
-.square1 h1{
-    color:#A9ADCE ;
-    background-color: black;
+.post ul{
+    display: flex;
+    gap: 0.75rem;
 }
-.square1 p{
-    color: #E9EAF3;
-    background-color: grey;
+ul{
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
-.square1 button{
-        background-color: #D8DAE8;
-        color: white; 
-        border: none; 
-        border-radius: 100%;
-        width: 2rem; 
-        height: 2rem; 
-        cursor: pointer;
+ul button{
+    background-color: transparent;
+    border: none; 
+    border-radius: 0; 
+    width: 3rem; 
+    height: 100%;
+    cursor: pointer;
 }
+ul button:focus{
+    outline: none;
+}
+#like img {
+    transition: transform 0.3s ease-in-out;
+}
+#like:hover img {
+    transform: scale(1.1);
+}
+#dislike img {
+    transition: transform 0.3s ease-in-out;
+}
+#dislike:hover img {
+    transform: scale(1.1);
+}
+
+.profilePicture{
+    height: 30px;
+    width: 30px;
+    border-radius: 99999px;
+}
+.postImage{
+    width:100%;
+    height: 100%;
+
+}
+.head{
+    display: flex;
+    align-items: center;
+}
+.userInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-left: 1rem;
+    width: 90%;
+    
+}
+.tittle{
+    color: black;
+    font-size: calc(8px + 0.5vw);;
+}
+.username{
+    font-size: calc(4px + 0.25vw);;
+    color: green;
+}
+.description{
+    font-size: calc(6px + 0.33vw);;
+    color: grey;
+}
+
 .overlayFollowers{
     position: fixed;
     top: 0;
@@ -357,6 +423,11 @@ input:focus {
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
+}
+
+.follow_info div:hover {
+    scale: 0.98;
 }
 
 .follow_info .value {

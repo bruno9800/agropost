@@ -4,26 +4,55 @@
 
 <div class="content">
   <div class="feed">
-    <div class="createPost">
-      <textarea name="post" id="post" cols="15" rows="5" placeholder="Escreva uma opinião sobre um produto"></textarea>
-      <ul>
-        <button>
-          <img src="{% static 'assets/enviar.svg' %}" alt="Enviar" />
-        </button>
-        <button>
-          <img src="{% static 'assets/camera.svg' %}" alt="Câmera" />
-        </button>
-      </ul>
-    </div>
-    {% block 'trend_buttons' %}{% endblock 'trend_buttons' %}
 
+    <form action={% url 'post:create' %} method="post" class="createPostForm">
+      {% csrf_token %}
+      <div class="createPost">
+        <div class="inputs">
+          <input type="text" class="input" name="post-title" id="post-title" placeholder="Insira um título para sua avaliação">
+          <textarea name="content" id="content" cols="15" rows="5" placeholder="Descreva sua experiência com um produto"></textarea>
+
+          <div class="product-inputs">
+            <div>
+            <input type="text" list="brand-list" name="brand" id="brand" class="input">
+            <datalist id="brand-list">
+              {% for  brand in brands_post %}
+                 <option value="{{ brand }}">{{ brand }}</option>
+              {% endfor %}
+            </datalist>
+            <select name="product-type" id="product-type">
+              {% for  product_type, label in product_types %}
+                 <option value="{{ product_type }}">{{ label }}</option>
+              {% endfor %}
+            </select>
+          </div>
+            <input type="text" name="product-name" id="product-name" class="input" list="product-list">
+            <datalist id="product-list">
+              {% for  product in products_post %}
+                 <option value="{{ product }}">{{ product }}</option>
+              {% endfor %}
+            </datalist>
+          </div>
+
+        </div>
+        <ul>
+          <button>
+            <img src="{% static 'assets/camera.svg' %}" alt="Câmera" />
+          </button>
+          <button type="submit">
+            <img src="{% static 'assets/enviar.svg' %}" alt="Enviar" />
+          </button>
+        </ul>
+      </div>
+    </form>
+    {% block 'trend_buttons' %}{% endblock 'trend_buttons' %}
       {% block 'post' %}{% endblock 'post' %}
    
     
     {% if error %}
     <span> {{ error }} </span>
     {% endif %}
-   {% block 'form_pagination' %}{% endblock 'form_pagination' %}
+  
   </div>
   <div class="side">
     <div class="first">
@@ -32,6 +61,7 @@
     </div>
     <div class="second">
       {% for product in products %}
+      <a href={% url 'product:product_profile' product.id %}>
         <div class='productBox'>
           <div class="productImg">
             <img src="{{product.picture.url}}" alt="imagem do produto">
@@ -41,6 +71,7 @@
             <span>{{ product.product_type }}</span>
           </div>
         </div>
+      </a>
       {% endfor %}
 
       <a href="#" class='more-products'>
@@ -137,9 +168,7 @@
       }
     });
   }
-  {% comment %} $(document).ready(function () {
-    initializeTrendButtons(".trendButtons", "Seguindo");
-  }); {% endcomment %}
+  
 
   function setActiveButton(button) {
     var buttons = document.querySelectorAll('.trendButtons');

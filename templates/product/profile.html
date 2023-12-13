@@ -2,10 +2,10 @@
 <link rel="stylesheet" href="{% static 'profile/styles.css' %}" />
 {% endblock 'head' %} {% block 'content' %}
 <div class="profile">
-  <div class="profilePost">
+  <div class="profileProduct">
     {% for post in posts %}
     <!-- Post Atualizado -->
-    <div class="post">
+    <div class="product">
       <div class="head">
       <div class="userInfo">
         <h1 class="tittle">{{post.title}}</h1>
@@ -40,14 +40,14 @@
       <div class="image">
         <img
           alt="Perfil"
-          src="{{ profile_user.profile.image.url }}"
+          src="{{ product.image.url }}"
           class="profileIcon"
         />
       </div>
     </div>
 
     <div class="contentProfile">
-      <h1>{{ profile_user.username }}</h1>
+      <h1>{{ product.name }}</h1>
       <div class="follow_info">
         <div onclick=openModalFollower() >
           <span class='value'>{{ followers|length }}</span>
@@ -57,19 +57,6 @@
           <span class='value'>{{ following|length }}</span>
           <span class='text'>Seguindo</span>
         </div >
-      </div>
-      {% if profile_user.bio %}
-      <p>{{ profile_user.bio }}</p>
-      {% else %}
-      <p>Biografia não disponível</p>
-      {% endif %}
-
-      <div>
-        {% if profile_user.date_of_birth %}
-        <p>{{ profile_user.date_of_birth }}</p>
-        {% else %}
-        <p>Data de nascimento não disponível</p>
-        {% endif %}
       </div>
     </div>
 
@@ -104,50 +91,30 @@
       </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
     {% if user.is_authenticated and user.username == profile_user.username %}
     <button id="openModal">Configurar</button>
     {% else %}
     <form action="{% url 'users:profile' username=profile_user.username %}" method="post">
       {% csrf_token %}
       <input type="hidden" name="profile_id" id="profile_id" value="{{ profile_user.id }}" />
-      {% if user.profile not in followers %}
-      <button type='submit' class='buttonFollow'>Seguir</button>
-      {% else %}
-      <button type='submit' class='unfollow_btn'>Parar de seguir</button>
 
       {% endif %}
     </form>
-    
-    {% endif %}
   </div>
 </div>
 
 <div id="myModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
-    <div class="data">
+    <div class="productType">
       <p>Bio</p>
-      <input id="bioInput" placeholder="{{ profile_user.bio }}" />
     </div>
-    <div class="data">
-      <p>Data de Aniversário</p>
+    <div class="productType">
+      <p>Tipo do produto</p>
       <input
-        id="dateOfBirthInput"
-        placeholder="{{ profile_user.date_of_birth }}"
+        id="productType"
+        placeholder="{{ product.product_type }}"
       />
-    </div>
-    <div class="actions">
-      <button onclick="saveProfile()">Salvar</button>
     </div>
   </div>
 </div>

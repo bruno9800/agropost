@@ -6,7 +6,7 @@
 {% block 'trend_buttons' %}
     <div class="trend">
       <ul>
-        <a href={% url "post:explorer" %} >
+        <a href={% url "post:explorer"  %} >
           <button class="trendButtons" >Explorar</button>
         </a>
         
@@ -18,54 +18,52 @@
 {% endblock 'trend_buttons' %}
 
 {% block 'post' %}
+
+
 {% for post_feed in posts_feed %}
-<div class="post">
-<div class="head">
-<a href="{% url 'users:profile' username=post_feed.author.username %}">
-  <button>
-    <img
-      alt="profileIcon"
-      class="profilePicture"
-      src="{{ post_feed.author.profile.image.url }}"
-    />
-  </button>
-</a>
-<div class="userInfo">
-  <h1 class="tittle">{{post_feed.title}}</h1>
-  <p class="username">{{post_feed.author.first_name}} está falando sobre <a href="#">{{post_feed.product}}</a></p>
-  <p class="description">{{post_feed.content}}</p>
-</div>
-</div>
-{% if post_feed.image %}
-<img alt="postImage" class="postImage" src="{{ post_feed.image }}" />
-{% endif %}
-<ul>
-<button
-  onclick="toggleLike('{{ post_feed.id }}')"
-  id="like_{{ post_feed.id }}"
->
-  <img src="./../../static/assets/postPositivo.svg" />
-</button>
-<button
-  onclick="toggleDislike('{{ post_feed.id }}')"
-  id="dislike_{{ post_feed.id }}"
->
-  <img src="./../../static/assets/postNegativo.svg" />
-</button>
-</ul>
-</div>
+    <div class="post">
+    <div class="head">
+    <a href="{% url 'users:profile' username=post_feed.author.username %}">
+      <button id="profilefeedimage">
+        <img
+          alt="profileIcon"
+          class="profilePicture"
+          src="{{ post_feed.author.profile.image.url }}"
+        />
+      </button>
+    </a>
+    <a class="userInfo" href={% url 'post:post_view' id=post_feed.id %}>
+      <h1 class="title-post">{{post_feed.title}}</h1>
+      <p class="username">{{post_feed.author.first_name}} está falando sobre <span style="color: var(--black); font-weight: bold;" >{{post_feed.product}}</span></p>
+      <p class="description">{{post_feed.content}}</p>
+    </a>
+    </div>
+    {% if post_feed.image %}
+    <img alt="postImage" class="postImage" src="{{ post_feed.image }}" />
+    {% endif %}
+    <ul>
+    <div class="likes"
+    >
+      <img src="{% static 'assets/likedArrow.svg' %}" />
+      <p>{{post_feed.upgrade.all|length}}</p>
+    </div>
+    <div class="likes"
+    >
+      <img src="{% static 'assets/unlikedArrow.svg' %}" />
+      <p>{{post_feed.downgrade.all|length}}</p>
+    </div>
+    </ul>
+    </div>
 {% endfor %}
+
+
+
+<ul class='paginator-list'>
+  {% for page in num_pages %}
+    <li><a href={% url 'post:home_pagination' page %}>{{ page }}</a></li>
+  {% endfor %}
+</ul>
 {% endblock 'post' %}
 
-
-{% block 'form_pagination' %}
-<form action="{% url 'post:home' %}" method="post">
-  {% csrf_token %}
-  <input type="hidden" name="page" id="page" value="{{ page }}" />
-  {% if num_pages != 1 %}
-  <button type="submit" class="button">Ver mais</button>
-  {% endif %}
-</form>
-{% endblock 'form_pagination' %}
 
 

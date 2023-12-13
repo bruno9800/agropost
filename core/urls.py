@@ -27,6 +27,7 @@ urlpatterns = [
     path("", include("post.urls")),
     path("", include("users.urls", namespace="users")),
     path("password/", include("userauth.urls")),
+    path("product/", include("product.urls"))
 ]
 
 if settings.DEBUG:

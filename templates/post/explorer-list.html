@@ -22,7 +22,7 @@
 <div class="post">
 <div class="head">
 <a href="{% url 'users:profile' username=post_feed.author.username %}">
-  <button>
+  <button id="profilefeedimage">
     <img
       alt="profileIcon"
       class="profilePicture"
@@ -30,42 +30,32 @@
     />
   </button>
 </a>
-<div class="userInfo">
-  <h1 class="tittle">{{post_feed.title}}</h1>
-  <p class="username">{{post_feed.author.first_name}} está falando sobre <a href="#">{{post_feed.product}}</a></p>
+<a class="userInfo">
+  <h1 class="title-post">{{post_feed.title}}</h1>
+  <p class="username">{{post_feed.author.first_name}} está falando sobre <span style="color: var(--black); font-weight: bold;" >{{post_feed.product}}</span></p>
   <p class="description">{{post_feed.content}}</p>
 </div>
-</div>
+</a>
 {% if post_feed.image %}
 <img alt="postImage" class="postImage" src="{{ post_feed.image }}" />
 {% endif %}
 <ul>
-
-  <button
-    onclick="toggleLike('{{ post_feed.id }}')"
-    id="like_{{ post_feed.id }}">
-    <img src="{% static 'assets/postPositivo.svg' %}" />
-  </button>
-
-
-<button
-  onclick="toggleDislike('{{ post_feed.id }}')"
-  id="dislike_{{ post_feed.id }}"
->
-  <img src="{% static 'assets/postNegativo.svg' %}" />
-</button>
-</ul>
+  <div class="likes"
+  >
+    <img src="{% static 'assets/likedArrow.svg' %}" />
+    <p>{{post_feed.upgrade.all|length}}</p>
+  </div>
+  <div class="likes"
+  >
+    <img src="{% static 'assets/unlikedArrow.svg' %}" />
+    <p>{{post_feed.downgrade.all|length}}</p>
+  </d>
+  </ul>
 </div>
 {% endfor %}
+<ul class='paginator-list'>
+  {% for page in num_pages %}
+    <li><a href={% url 'post:explorer_pagination' page %}>{{ page }}</a></li>
+  {% endfor %}
+</ul>
 {% endblock 'post' %}
-
-
-{% block 'form_pagination' %}
-<form action="{% url 'post:explorer' %}" method="post">
-  {% csrf_token %}
-  <input type="hidden" name="page" id="page" value="{{ page }}" />
-  {% if num_pages != 1 %}
-  <button type="submit" class="button">Ver mais</button>
-  {% endif %}
-</form>
-{% endblock 'form_pagination' %}

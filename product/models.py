@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Brand(models.Model):
     name = models.CharField(blank=False, null=False, max_length=50, editable=True)
     rate = models.FloatField(blank=True, null=True, editable=False, default=0.0)
@@ -16,7 +15,6 @@ class Brand(models.Model):
 
     def __str__(self):
         return self.name
-
 
 class Product(models.Model):
     product_types = (
@@ -40,6 +38,9 @@ class Product(models.Model):
     product_type = models.CharField(
         choices=product_types, null=False, blank=False, max_length=50
     )
+
+    def get_product_types(self):
+        return [(product_type, label) for product_type, label in self.product_types]
 
     def __str__(self):
         return self.name
