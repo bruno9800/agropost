@@ -1,3 +1,33 @@
 .post-highlight {
   align-items: flex-start;
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.post-highlight .post-details{
+  display:flex;
+  flex-direction: column;
+  gap: 1rem;
+
+}
+
+.post-highlight .post-details p {
+  text-align: justify;
+}
+
+.post-highlight .post-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.post-highlight .post-hero div span {
+  margin-left: 0.25rem;
+}
+
+.post-highlight .post-hero img {
+  height: 120px;
+  width: auto;
+  border-radius: 12px;
 }

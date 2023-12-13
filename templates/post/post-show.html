@@ -4,8 +4,14 @@
 {% block 'content' %} 
   <div class="content">
     <div class="feed post-highlight">
-      <div>
-        <h1>{{post.title}}</h1>
+      <div class="post-details">
+        <div class="post-hero">
+          <div>
+            <h1>{{post.title}}</h1>
+            <span>opnião sobre <strong>{{post.product.name}}</strong></span>
+          </div>
+          <img src={{post.product.picture.url}} alt="imagem do produto">
+        </div>
         <p>
           {{post.content}}
         </p>

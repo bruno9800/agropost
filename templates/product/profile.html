@@ -7,17 +7,17 @@
     <!-- Post Atualizado -->
     <div class="product">
       <div class="head">
-      <div class="userInfo">
-        <h1 class="tittle">{{post.title}}</h1>
-        <p class="username">{{post.author.first_name}} está falando sobre <a href="#">{{post.product}}</a></p>
-        <p class="description">{{post.content}}</p>
-      </div>
+        <div class="userInfo">
+            <h1 class="tittle">{{post.title}}</h1>
+            <p class="username">{{post.author.first_name}} está falando sobre <a href="#">{{post.product}}</a></p>
+            <p class="description">{{post.content}}</p>
+        </div>
       </div>
       {% if post_feed.image %}
       <img alt="postImage" class="postImage" src="{{ post.image }}" />
       {% endif %}
       <ul>
-      <button
+        <button
         onclick="toggleLike('{{ post.id }}')"
         id="like_{{ post.id }}"
       >
@@ -40,7 +40,7 @@
       <div class="image">
         <img
           alt="Perfil"
-          src="{{ product.image.url }}"
+          src="{{ product.picture.url }}"
           class="profileIcon"
         />
       </div>
@@ -50,56 +50,17 @@
       <h1>{{ product.name }}</h1>
       <div class="follow_info">
         <div onclick=openModalFollower() >
-          <span class='value'>{{ followers|length }}</span>
-          <span class='text'>Seguidores</span>
+          <span class='value'>Marca</span>
+          <span class='text'>{{ product.brand }}</span>
         </div >
         <div onclick=openModalFollowing()>
-          <span class='value'>{{ following|length }}</span>
-          <span class='text'>Seguindo</span>
+            <span class='value'>Tipo</span>
+            <span class='text'>{{ product.product_type }}</span>
         </div >
       </div>
     </div>
 
-    <!-- Modal de Exbição de Seguidores e Seguindo -->
-    <div id="followers" class="overlayFollowers">
-      <div class="modalFollowers">
-        {% for profile in followers %}
-        <div class="modalFollowersContent">
-          <img src="{{profile.image.url}}" />
-          <div class="followersContent">
-            <h1>{{profile.user.username}}</h1>
-            <p>teste</p>
-          </div>
-        </div>
-        {% endfor %}
-        <button style="width: 30%;" onclick=closeModalFollower()> Fechar </button>
-      </div>
-    </div>
-
-    <div id="following" class="overlayFollowing">
-      <div class="modalFollowing">
-        {% for profile in following %}
-        <div class="modalFollowingContent">
-          <img src="{{profile.profile.image.url}}" />
-          <div class="followingContent">
-            <h1>{{profile.username}}</h1>
-            <p>teste</p>
-          </div>
-        </div>
-        {% endfor %}
-        <button style="width: 30%;" onclick=closeModalFollowing()> Fechar </button>
-      </div>
-    </div>
-
-    {% if user.is_authenticated and user.username == profile_user.username %}
-    <button id="openModal">Configurar</button>
-    {% else %}
-    <form action="{% url 'users:profile' username=profile_user.username %}" method="post">
-      {% csrf_token %}
-      <input type="hidden" name="profile_id" id="profile_id" value="{{ profile_user.id }}" />
-
-      {% endif %}
-    </form>
+    
   </div>
 </div>
 

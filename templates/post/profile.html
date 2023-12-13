@@ -7,11 +7,11 @@
     <!-- Post Atualizado -->
     <div class="post">
       <div class="head">
-      <div class="userInfo">
-        <h1 class="tittle">{{post.title}}</h1>
-        <p class="username">{{post.author.first_name}} está falando sobre <a href="#">{{post.product}}</a></p>
-        <p class="description">{{post.content}}</p>
-      </div>
+        <div class="userInfo">
+          <h1 class="tittle">{{post.title}}</h1>
+          <p class="username">{{post.author.first_name}} está falando sobre <a href="#">{{post.product}}</a></p>
+          <p class="description">{{post.content}}</p>
+        </div>
       </div>
       {% if post_feed.image %}
       <img alt="postImage" class="postImage" src="{{ post.image }}" />
