@@ -1,7 +1,6 @@
 {% extends "post/home.html" %}
 {% load static %}
 
-
 {% block 'trend_buttons' %}
     <div class="trend">
       <ul>
@@ -16,7 +15,6 @@
     </div>
 {% endblock 'trend_buttons' %}
 
-
 {% block 'post' %}
 {% for post_feed in posts_feed %}
 <div class="post">
@@ -30,7 +28,7 @@
     />
   </button>
 </a>
-<a class="userInfo">
+<a class="userInfo" href={% url 'post:post_view' id=post_feed.id %} >
   <h1 class="title-post">{{post_feed.title}}</h1>
   <p class="username">{{post_feed.author.first_name}} está falando sobre <span style="color: var(--black); font-weight: bold;" >{{post_feed.product}}</span></p>
   <p class="description">{{post_feed.content}}</p>

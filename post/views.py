@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from users.models import Profile
-from post.models import Post
+from post.models import Post, Comment
 from product.models import Product,Brand
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import random
@@ -97,5 +97,14 @@ def explorer_view(request,page):
 @login_required
 def post_view(request, id):
     post = Post.objects.get(id=id)
+    coments = Comment.objects.filter(post=post)
     
-    return render(request, "post/post-show.html", {'post': post})
+    return render(request, "post/post-show.html", {'post': post,'comments': coments})
+
+@login_required
+def create_comment(request):
+    content = request.POST.get("content")
+    id_post = request.POST.get("id_post")
+    post = Post.objects.get(id=int(id_post))
+    Comment.objects.create(content=content,post=post,user=request.user)
+    return redirect("post:post_view", id=id_post)

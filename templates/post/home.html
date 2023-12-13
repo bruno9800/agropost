@@ -13,20 +13,7 @@
           <textarea name="content" id="content" cols="15" rows="5" placeholder="Descreva sua experiência com um produto"></textarea>
 
           <div class="product-inputs">
-            <div>
-            <input type="text" list="brand-list" name="brand" id="brand" class="input">
-            <datalist id="brand-list">
-              {% for  brand in brands_post %}
-                 <option value="{{ brand }}">{{ brand }}</option>
-              {% endfor %}
-            </datalist>
-            <select name="product-type" id="product-type">
-              {% for  product_type, label in product_types %}
-                 <option value="{{ product_type }}">{{ label }}</option>
-              {% endfor %}
-            </select>
-          </div>
-            <input type="text" name="product-name" id="product-name" class="input" list="product-list">
+            <input type="text" name="product-name" id="product-name" class="input" list="product-list" placeholder="Selecione um produto">
             <datalist id="product-list">
               {% for  product in products_post %}
                  <option value="{{ product }}">{{ product }}</option>
@@ -61,7 +48,7 @@
     </div>
     <div class="second">
       {% for product in products %}
-      <a href={% url 'product:product_profile' product.id %}>
+      <a href={% url 'product:product_profile' product.id %} class="link-product">
         <div class='productBox'>
           <div class="productImg">
             <img src="{{product.picture.url}}" alt="imagem do produto">
@@ -73,10 +60,6 @@
         </div>
       </a>
       {% endfor %}
-
-      <a href="#" class='more-products'>
-        Ver mais
-      </a>
     </div>
     <div class="third"></div>
   </div>

@@ -12,9 +12,11 @@ class Post(models.Model):
     author = models.ForeignKey(User,blank=False,null=False,on_delete=models.CASCADE)
     upgrade = models.ManyToManyField(User,related_name="upgrade",null=True,blank=True)
     downgrade = models.ManyToManyField(User,related_name="downgrade",null=True,blank=True)
-
-
+    
     def __str__(self):
         return self.title
 
-
+class Comment(models.Model):
+    post = models.ForeignKey(Post,blank=False,null=False, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, blank=False,null=False, on_delete=models.CASCADE)
+    content = models.TextField(blank=False,null=False,editable=True)

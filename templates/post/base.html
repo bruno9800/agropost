@@ -27,7 +27,9 @@
     </div>
     
     <form action="{% url 'users:profile' username=user%}" method="get">
-      <button class="profileButton"><img alt="Perfil" id="profileImage" class="profileImage" /></button>
+      <button class="profileButton">
+        <img src={{user.profile.image.url}} alt="imagem do usuario" class="profileImage">
+      </button>
     </form>
     <form action="{% url 'users:logout' %}" method="post">
       {% csrf_token %}

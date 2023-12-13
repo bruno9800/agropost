@@ -1,8 +1,6 @@
 {% extends "post/home.html" %}
 {% load static %}
 
-
-
 {% block 'trend_buttons' %}
     <div class="trend">
       <ul>
@@ -18,7 +16,6 @@
 {% endblock 'trend_buttons' %}
 
 {% block 'post' %}
-
 
 {% for post_feed in posts_feed %}
     <div class="post">
@@ -56,14 +53,9 @@
     </div>
 {% endfor %}
 
-
-
 <ul class='paginator-list'>
   {% for page in num_pages %}
     <li><a href={% url 'post:home_pagination' page %}>{{ page }}</a></li>
   {% endfor %}
 </ul>
 {% endblock 'post' %}
-
-
-

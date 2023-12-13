@@ -327,6 +327,9 @@ ul button:focus{
     border-radius: 0.5rem;
 }
 
+.link-product {
+    text-decoration: none;
+}
 
 .productBox {
     display: flex;
@@ -334,6 +337,7 @@ ul button:focus{
     justify-content: flex-start;
     gap: 0.5rem;
     padding: 0.5rem;
+
 }
 
 .productHero {

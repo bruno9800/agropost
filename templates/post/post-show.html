@@ -16,7 +16,33 @@
           {{post.content}}
         </p>
       </div>
+
+      <!-- form -->
+      <form action="{% url 'post:create_comment'%}" method="post" class="comment-form">
+        {% csrf_token %}
+        <input type="hidden" name="id_post" value={{post.id}}>
+        <textarea name="content" id="content" cols="15" rows="4" class="textarea-content"></textarea>
+        <button type="submit">
+          <img src="{% static 'assets/enviar.svg' %}" alt="Enviar" />
+        </button>
+      </form>
+
+      <!-- lista de comentarios -->
+
+      {% for comment in comments %}
+          <div class="commentBox">
+            <img src={{comment.user.profile.image.url}} alt="imagem do usuario">
+            <p>{{comment.content}}</p>
+          </div>
+      {% endfor %}
+
     </div>
-    <div class="side"></div>
+    <div class="side">
+      <div class="first">
+        <img src="{% static 'assets/propaganda1.jpg' %}" />
+        <div class="publi"><p>Aproveite As Novidades</p></div>
+      </div>
+
+    </div>
   </div>
 {% endblock 'content' %}

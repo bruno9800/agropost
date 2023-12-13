@@ -244,19 +244,18 @@ ul button:focus{
     width: 90%;
     
 }
-.tittle{
-    color: black;
-    font-size: calc(8px + 0.5vw);;
+.title{
+    font-size: 1.25rem;
+    color: var(--black);
 }
 .username{
-    font-size: calc(4px + 0.25vw);;
+    font-size: 0.75rem;
     color: green;
 }
 .description{
-    font-size: calc(6px + 0.33vw);;
+    font-size: 0.875rem;
     color: grey;
 }
-
 .overlayFollowers{
     position: fixed;
     top: 0;
