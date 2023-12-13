@@ -3,17 +3,12 @@
 {% endblock 'head' %} {% block 'content' %}
 <div class="profile">
   <div class="profilePost">
-    
     {% for post in posts %}
     <div class="generic">
-      <div class="square1">
-        {{ post.content }}
-      </div>
+      <div class="square1">{{ post.content }}</div>
     </div>
     {% endfor %}
-     
   </div>
-  
 
   <div class="profileData">
     <div class="topProfile">
@@ -30,14 +25,8 @@
     <div class="contentProfile">
       <h1>{{ profile_user.username }}</h1>
       <div class="follow_info" style="display: flex;">
-        <div>
-          <span class='value' >{{ followers|length }} </span>
-          <span class='text'>Seguidores</span>
-        </div>
-        <div>
-          <span class='value'>{{ following|length }} </span>
-          <span class='text'>Seguindo</span>
-        </div>
+      <h5 class="followers">{{ followers|length }} Seguidores  </h5>
+      <h5 class="following">{{ following|length }} Seguindo</h5>
       </div>
       {% if profile_user.bio %}
       <p>{{ profile_user.bio }}</p>
@@ -48,30 +37,62 @@
       <div>
         {% if profile_user.date_of_birth %}
         <p>{{ profile_user.date_of_birth }}</p>
-        {% else %} 
+        {% else %}
         <p>Data de nascimento não disponível</p>
         {% endif %}
       </div>
     </div>
 
+    <!-- Modal de Exbição de Seguidores e Seguindo -->
+    <div id="followers" class="overlayFollowers">
+      <div class="modalFollowers">
+        {% for profile in followers %}
+        <div class="modalFollowersContent">
+          <img src="{{profile.image.url}}" />
+          <div class="followersContent">
+            <h1>{{profile.user.username}}</h1>
+            <p>teste</p>
+          </div>
+        </div>
+        {% endfor %}
+        <button style="width: 30%;" onclick=closeModalFollower()> Fechar </button>
+      </div>
+    </div>
+
+    <div id="following" class="overlayFollowing">
+      <div class="modalFollowing">
+        {% for profile in following %}
+        <div class="modalFollowingContent">
+          <img src="{{profile.profile.image.url}}" />
+          <div class="followingContent">
+            <h1>{{profile.username}}</h1>
+            <p>teste</p>
+          </div>
+        </div>
+        {% endfor %}
+        <button style="width: 30%;" onclick=closeModalFollowing()> Fechar </button>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
     {% if user.is_authenticated and user.username == profile_user.username %}
     <button id="openModal">Configurar</button>
     {% else %}
-
-    {% if user.profile not in followers %}
     <form action="{% url 'users:profile' username=profile_user.username %}" method="post">
       {% csrf_token %}
       <input type="hidden" name="profile_id" id="profile_id" value="{{ profile_user.id }}" />
       <button type='submit' class='button'>Seguir</button>
-    </form>
 
-    {% else %}
-    <form action="{% url 'users:profile' username=profile_user.username %}" method="post">
-      {% csrf_token %}
-      <input type="hidden" name="profile_id" id="profile_id" value="{{ profile_user.id }}" />
-      <button type='submit' class='unfollow_btn' ">Deixar seguir</button>
     </form>
-    {% endif %} 
     
     {% endif %}
   </div>
@@ -108,11 +129,24 @@
     document.getElementById("myModal").style.display = "none";
     document.getElementById("overlay").style.display = "none";
   }
+  function openModalFollower() {
+    document.getElementById("followers").style.display = "flex";
+  }
+  function closeModalFollower() {
+    document.getElementById("followers").style.display = "none";
+  }
+
+  function openModalFollowing() {
+    document.getElementById("following").style.display = "flex";
+  }
+  function closeModalFollowing() {
+    document.getElementById("following").style.display = "none";
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     closeModal();
   });
   document.getElementById("openModal").addEventListener("click", openModal);
-
 </script>
 
 {% endblock 'content' %}
